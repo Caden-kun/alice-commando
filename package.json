@@ -1,0 +1,38 @@
+{
+  "name": "alice-commando",
+  "version": "1.0.0",
+  "description": "Up-to-date code for alice but in commando.",
+  "main": "bot.ts",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "discord.js-commando": "^0.11.1",
+    "fs": "0.0.1-security",
+    "js-yaml": "^3.14.1",
+    "path": "^0.12.7",
+    "quick.db": "^7.1.3",
+    "random-bunny": "^1.2.2",
+    "random-question": "^0.2.1",
+    "random-questions": "^1.0.1",
+    "tsc": "^1.20150623.0",
+    "twitter-v2": "^1.1.0",
+    "typescript": "^4.3.4"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^3.12.5",
+    "@types/node": "^14.14.16",
+    "@typescript-eslint/eslint-plugin": "^4.28.0",
+    "@typescript-eslint/parser": "^4.28.0",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node ./build/bot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KingOKarma/typescript-discord-bot-template.git"
+  },
+  "author": "Caden-kun"
+}
