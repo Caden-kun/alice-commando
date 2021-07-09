@@ -2,7 +2,7 @@ import * as commando from "discord.js-commando";
 import { Message } from "discord.js";
 import { STORAGE } from "../../globals";
 import Storage from "../../storage";
-export default class QotdCommand extends commando.Command {
+export default class QotdsetCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 

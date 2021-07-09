@@ -3,10 +3,10 @@ import { STORAGE } from "./globals";
 import fs from "fs";
 
 export interface Roles {
+    botupdates: string;
     identifier: string;
     roleID: string;
     userID: string;
-
 
 }
 
@@ -17,17 +17,29 @@ export interface Roles {
  * @property {string[]} channels
  */
 export default class Storage {
-
     private static readonly _configLocation = "./storage.yml";
 
+    public botlogchannel: string;
+
+    public botupdates: string;
+
+    public developers: string[];
+
+
     public qotdchannel: string;
+
+    public qotdping: string;
 
     public qotdserver: string;
 
 
     private constructor() {
+        this.botupdates = "";
+        this.botlogchannel = "";
+        this.developers = [""];
         this.qotdchannel = "";
         this.qotdserver = "";
+        this.qotdping = "";
 
 
     }

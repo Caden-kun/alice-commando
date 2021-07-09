@@ -1,53 +1,78 @@
-import fs from 'fs';
-import { safeDump, safeLoad } from 'js-yaml';
+import { dump, load } from "js-yaml";
+import { CONFIG } from "../globals";
+import fs from "fs";
+
+export interface Colours {
+    blue: string;
+    green: string;
+    red: string;
+    yellow: string;
+}
+
 
 /**
  * This represents the config.yml
  * @class Config
- * @property {string} token
- * @property {string} prefix
- * @property {string[]} owners
+ * @property {string[]} channels
  */
 export default class Config {
-    public readonly token: string;
+    private static readonly _configLocation = "./config.yml";
+
+    public readonly colours: Colours;
+
+    public readonly dev: string;
+
+    public readonly kickfailerror: string;
+
+    public readonly kickfailstaff: string;
+
+    public readonly kickhelp: string;
+
+    public readonly kicknoperms: string;
+
+    public readonly kickself: string;
+
+    public readonly owners: string;
 
     public readonly prefix: string;
 
-    public readonly owners: string[];
+    public readonly token: string;
 
-    private static LOCATION = './config.yml';
+    private constructor() {
+        this.colours = { blue: "", green: "", red: "", yellow: "" };
+        this.dev = "";
+        this.kicknoperms = "";
+        this.kickfailerror = "";
+        this.kickfailstaff = "";
+        this.kickhelp = "";
+        this.kickself = "";
+        this.owners = "";
+        this.prefix = "";
+        this.token = "";
 
-    constructor() {
-      this.token = '';
-      this.prefix = '';
-      this.owners = [''];
     }
 
     /**
        *  Call getConfig instead of constructor
        */
     public static getConfig(): Config {
-      if (!fs.existsSync(Config.LOCATION)) {
-        throw new Error('Please create a config.yml');
-      }
-      const fileContents = fs.readFileSync(
-        Config.LOCATION,
-        'utf-8',
-      );
-      const casted = safeLoad(fileContents) as Config;
+        // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
+        if (!fs.existsSync(Config._configLocation)) {
+            throw new Error("Please create a config.yml");
+        }
+        const fileContents = fs.readFileSync(
+            Config._configLocation,
+            "utf-8"
+        );
+        const casted = load(fileContents) as Config;
 
-      return casted;
+        return casted;
     }
 
     /**
-   *  Safe the config to the congfig.yml default location
+   *  Safe the config to the config.yml default location
    */
-    public saveConfig(): void {
-      const serialized = safeDump(this);
-      fs.writeFileSync(
-        Config.LOCATION,
-        serialized,
-        'utf8',
-      );
+    public static saveConfig(): void {
+        fs.writeFileSync(Config._configLocation, dump(CONFIG));
     }
 }
