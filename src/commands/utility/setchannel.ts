@@ -13,14 +13,6 @@ export default class QotdsetCommand extends commando.Command {
                     prompt: "which channel would you like to set for the QOTD? Please provide a channel ID.",
 
                     type: "string"
-                },
-                {
-                    key: "qotdserver",
-
-                    prompt: "Nice, you set a channel, now you need to set the server. Please provide the server ID." +
-                    " Please note, the server ID must be the same server where the channel you selected is.",
-
-                    type: "string"
                 }
             ],
 
@@ -46,11 +38,12 @@ export default class QotdsetCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { qotdchannel, qotdserver }: { qotdchannel: string; qotdserver: string; }
+        { qotdchannel }: { qotdchannel: string; }
     ): Promise<Message | Message[]> {
 
         STORAGE.qotdchannel = qotdchannel;
-        STORAGE.qotdserver = qotdserver;
+        if (msg.guild === null) return msg.say("There was an error?");
+        STORAGE.qotdserver = msg.guild.id;
         // eslint-disable-next-line prefer-destructuring
         Storage.saveConfig();
         return msg.say(`<#${STORAGE.qotdchannel}> has been set! if this` +
