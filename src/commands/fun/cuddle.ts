@@ -8,7 +8,7 @@ export default class CuddleCommand extends commando.Command {
 
             args: [
                 {
-                    key: "huguser",
+                    key: "cuddleuser",
 
                     prompt: "Cuddling alone? I'm not allowing it! Who are you cuddling with? Please mention a user.",
 
@@ -38,33 +38,33 @@ export default class CuddleCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { huguser }: { huguser: string; }
+        { cuddleuser }: { cuddleuser: string; }
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
 
-        const member = await getMember(huguser, msg.guild);
+        const member = await getMember(cuddleuser, msg.guild);
 
         if (member === null)
             return msg.reply("mention a user!");
 
         const cuddle = [
-            "http://cadenkun.com/alice/cuddle/cuddle1.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle2.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle3.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle4.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle5.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle6.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle7.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle8.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle9.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle10.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle11.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle12.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle13.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle14.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle15.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle16.gif",
-            "http://cadenkun.com/alice/cuddle/cuddle17.gif"
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397110483714088/cuddle1.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397119253872685/cuddle2.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397127671054356/cuddle3.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397135163260928/cuddle4.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397140942356490/cuddle5.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397148533915649/cuddle6.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397157485084682/cuddle7.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397166333886474/cuddle8.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397173393948672/cuddle9.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397171460898826/cuddle10.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397177494929448/cuddle11.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397192289419274/cuddle12.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397187713695784/cuddle13.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397191075954698/cuddle14.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397206796730408/cuddle15.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397205874900992/cuddle16.gif",
+            "https://cdn.discordapp.com/attachments/857397061544181810/857397208524652544/cuddle17.gif"
 
         ];
 
