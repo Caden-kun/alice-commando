@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message, MessageEmbed } from "discord.js";
+import { CONFIG, STORAGE } from "../../globals";
+import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
 import { getMember } from "../../utils";
 
 export default class CuddleCommand extends commando.Command {
@@ -80,7 +81,16 @@ export default class CuddleCommand extends commando.Command {
             .setColor("#EFFF00")
             .setImage(cuddle[Math.floor(Math.random() * cuddle.length)])
             .setDescription(`${msg.author.toString()} is cuddling ${member.toString()}! ${cuddlereply[Math.floor(Math.random() * cuddlereply.length)]}`);
-        return msg.channel.send(embed);
+        const cuddlelogs = new MessageEmbed()
+            .setTitle("Command used: Cuddle")
+            .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}`)
+            .setColor(CONFIG.colours.yellow)
+            .setTimestamp();
+        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
+
+        const cuddlelog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
+        void msg.channel.send(embed);
+        return cuddlelog.send(cuddlelogs);
 
     }
 

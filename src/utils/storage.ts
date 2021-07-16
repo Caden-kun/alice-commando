@@ -21,8 +21,6 @@ export default class Storage {
 
     public botlogchannel: string;
 
-    public botlogserver: string;
-
     public botupdates: string;
 
     public developers: string[];
@@ -33,10 +31,10 @@ export default class Storage {
 
     public qotdserver: string;
 
+
     private constructor() {
         this.botupdates = "";
         this.botlogchannel = "";
-        this.botlogserver = "";
         this.developers = [""];
         this.qotdchannel = "";
         this.qotdserver = "";

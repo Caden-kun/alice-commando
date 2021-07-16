@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message, MessageEmbed } from "discord.js";
+import { CONFIG, STORAGE } from "../../globals";
+import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
 import { getMember } from "../../utils";
 
 export default class HugCommand extends commando.Command {
@@ -121,7 +122,16 @@ export default class HugCommand extends commando.Command {
             .setColor("#EFFF00")
             .setImage(hugs[Math.floor(Math.random() * hugs.length)])
             .setDescription(`${msg.author.toString()} has given ${member.toString()} a hug!`);
-        return msg.channel.send(embed);
+        const huglogs = new MessageEmbed()
+            .setTitle("Command used: hug")
+            .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}`)
+            .setColor(CONFIG.colours.yellow)
+            .setTimestamp();
+        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
+
+        const huglog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
+        void msg.channel.send(embed);
+        return huglog.send(huglogs);
 
     }
 

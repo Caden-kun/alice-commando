@@ -1,30 +1,44 @@
+import { Client, SQLiteProvider } from "discord.js-commando";
 import { CONFIG } from "./globals";
-import { Client } from "discord.js-commando";
-import { onReady } from "./events";
+import { Collection } from "discord.js";
+import { Collections } from "./utils/types";
+import { Database } from "sqlite3";
+import { onReady } from "./events/ready";
+import { open } from "sqlite";
 import path from "path";
-
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-async function main() {
-    const bot = new Client({
+export const col: Collections = {
+    aliases: new Collection(),
+    commands: new Collection(),
+    cooldowns: new Collection()
+};
+async function main(): Promise<void> {
+    const client = new Client({
 
         commandPrefix: CONFIG.prefix,
         owner: CONFIG.owners
 
     });
 
-    // Runs the function defined in ./events
-    bot.on("ready", () => void onReady(bot));
+    // Runs the onReady function defined in ./events/ready
+    client.on("ready", () => void onReady(client, col));
 
     // Registers all groups/commands/etc
-    bot.registry.registerGroups([
+    client.registry.registerGroups([
         ["group1", "first batch of commands"],
-        ["fun", "fun commands"]
+        ["fun", "fun commands"],
+        ["utility", "useful commands"]
     ]).registerDefaults()
         .registerCommandsIn(
             path.join(__dirname, "commands")
         );
+    void open({
+        driver: Database,
+        filename: path.join(__dirname, "../settings.sqlite3")
+    }).then(async (db) => {
+        await client.setProvider(new SQLiteProvider(db));
+    });
 
-    await bot.login(CONFIG.token);
+    await client.login(CONFIG.token);
 }
 
 main().catch(console.error);

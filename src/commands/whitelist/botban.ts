@@ -2,34 +2,30 @@ import * as commando from "discord.js-commando";
 import { Message } from "discord.js";
 import { STORAGE } from "../../globals";
 import Storage from "../../storage";
-export default class QotdsetCommand extends commando.Command {
+export default class BotbanCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["s"],
-
             args: [
                 {
-                    key: "qotdchannel",
+                    key: "banuser",
 
-                    prompt: "which channel would you like to set for the QOTD? Please provide a channel ID.",
+                    prompt: "Who are you banning from using alice? Please ping the user or provide their ID.",
 
                     type: "string"
                 }
             ],
 
-            description: "Server Admins can set the QOTD channel for the bot.",
+            description: "Bot Devs can ban users from using commands from alice.",
 
             group: "group1",
 
             guildOnly: true,
 
+            memberName: "botban",
 
-            memberName: "setqotd",
+            name: "botban",
 
-            name: "setqotd",
-
-            ownerOnly: true,
 
             throttling: {
                 duration: 60,
