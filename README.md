@@ -1,4 +1,4 @@
-# alice-commando
+# Alice Commando
 - Up-to-date code for Alice Zuberg but commando
 
 # How to install and run:
