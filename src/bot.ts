@@ -3,6 +3,9 @@ import { CONFIG } from "./globals";
 import { Collection } from "discord.js";
 import { Collections } from "./utils/types";
 import { Database } from "sqlite3";
+import { onGuildCreate } from "./events/guildCreate";
+import { onGuildDelete } from "./events/guildDelete";
+import { onMessage } from "./events/message";
 import { onReady } from "./events/ready";
 import { open } from "sqlite";
 import path from "path";
@@ -21,6 +24,12 @@ async function main(): Promise<void> {
 
     // Runs the onReady function defined in ./events/ready
     client.on("ready", () => void onReady(client, col));
+
+    client.on("message", async (msg) => void onMessage(msg));
+
+    client.on("guildCreate", (guild) => void onGuildCreate(guild));
+
+    client.on("guildDelete", (guild) => void onGuildDelete(guild));
 
     // Registers all groups/commands/etc
     client.registry.registerGroups([
