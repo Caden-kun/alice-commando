@@ -34,6 +34,8 @@ export default class Config {
 
     public readonly owner: string;
 
+    public readonly owners: string | string[] | undefined;
+
     public readonly prefix: string;
 
     public readonly token: string;

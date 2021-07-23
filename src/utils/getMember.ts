@@ -5,8 +5,6 @@ import { Guild, GuildMember } from "discord.js";
  * @param {Guild} guild the Guild instance the of where the Member is from
  * @returns {GuildMember | null} A Member instance from a server or null
  */
-
-
 export async function getMember(uid: string | undefined, guild: Guild): Promise<GuildMember | null> {
     if (uid === undefined) return null;
     let uidParsed = uid;

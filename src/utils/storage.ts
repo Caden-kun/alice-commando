@@ -29,12 +29,13 @@ export default class Storage {
 
     public guildjoins: string;
 
+    public modlogs: string[];
+
     public qotdchannel: string;
 
     public qotdping: string;
 
     public qotdserver: string;
-
 
     private constructor() {
         this.botupdates = "";
@@ -42,6 +43,7 @@ export default class Storage {
         this.botlogchannel = "";
         this.developers = [""];
         this.guildjoins = "";
+        this.modlogs = [""];
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";

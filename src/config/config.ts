@@ -1,5 +1,5 @@
 import { dump, load } from "js-yaml";
-import { CONFIG } from "../globals";
+import { CONFIG } from "../utils/globals";
 import fs from "fs";
 
 export interface Colours {
@@ -34,7 +34,7 @@ export default class Config {
 
     public readonly owner: string;
 
-    public owners: string | string[] | Set<string> | undefined;
+    public readonly owners: string | string[] | undefined;
 
     public readonly prefix: string;
 
@@ -49,7 +49,7 @@ export default class Config {
         this.kickhelp = "";
         this.kickself = "";
         this.owner = "";
-        this.owners = "";
+        this.owners = [""];
         this.prefix = "";
         this.token = "";
 
