@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message, MessageEmbed } from "discord.js";
+import { CONFIG, STORAGE } from "../../globals";
+import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
 import { randomBunny } from "random-bunny";
 export default class RedditCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -53,6 +54,17 @@ export default class RedditCommand extends commando.Command {
                 .setDescription(`From [r/${subreddit}](https://reddit.com/r/${subreddit})`);
             const m = await msg.channel.send(loading);
             void m.edit(loaded);
+            if (msg.guild === null)
+                return msg.say("there was a problem?");
+            const log = new MessageEmbed()
+                .setTitle("Command used: Reddit")
+                .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}\nSubreddit: ${subreddit}`)
+                .setColor(CONFIG.colours.yellow)
+                .setTimestamp();
+            const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
+
+            const cuddlelog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
+            return cuddlelog.send(log);
         });
 
     }

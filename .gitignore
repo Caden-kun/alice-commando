@@ -2,3 +2,4 @@ config.yml
 build
 node_modules
 storage.yml
+logtemplate.ts
