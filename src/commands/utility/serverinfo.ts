@@ -93,8 +93,6 @@ export default class ServerinfoCommand extends commando.Command {
                 `<:AH_StatusInvis:723216426537844748> **Offline:** ${members.filter((member) => member.presence.status === "offline").size}`,
                 "\u200b"
             ])
-
-
             .setTimestamp();
         return msg.channel.send(embed);
     }

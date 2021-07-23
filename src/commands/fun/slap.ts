@@ -1,7 +1,7 @@
 import * as commando from "discord.js-commando";
-import { CONFIG, STORAGE } from "../../globals";
-import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
-import { getMember } from "../../utils";
+import { Message, MessageEmbed } from "discord.js";
+import { CONFIG } from "../../utils/globals";
+import { getMember } from "../../utils/getMember";
 
 export default class SlapCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -80,16 +80,7 @@ export default class SlapCommand extends commando.Command {
             .setColor(CONFIG.colours.yellow)
             .setImage(slap[Math.floor(Math.random() * slap.length)])
             .setDescription(`${msg.author.toString()} gave ${member.toString()} a slap! ${slapreply[Math.floor(Math.random() * slapreply.length)]}`);
-        const slaplogs = new MessageEmbed()
-            .setTitle("Command used: slap")
-            .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}`)
-            .setColor(CONFIG.colours.yellow)
-            .setTimestamp();
-        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
-
-        const slaplog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
-        void msg.channel.send(embed);
-        return slaplog.send(slaplogs);
+        return msg.channel.send(embed);
 
 
     }

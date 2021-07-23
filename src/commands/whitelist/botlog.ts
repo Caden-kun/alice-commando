@@ -1,7 +1,7 @@
 import * as commando from "discord.js-commando";
-import { CONFIG, STORAGE } from "../../globals";
+import { CONFIG, STORAGE } from "../../utils/globals";
 import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
-import Storage from "../../storage";
+import Storage from "../../utils/storage";
 export default class BotlogCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {

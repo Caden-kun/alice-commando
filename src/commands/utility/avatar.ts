@@ -1,6 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message, MessageEmbed } from "discord.js";
-import { CONFIG } from "../../globals";
+import { CONFIG, STORAGE } from "../../utils/globals";
+import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
 import { getMember } from "../../utils";
 
 // Creates a new class (being the command) extending off of the commando client
@@ -55,7 +55,19 @@ export default class AvatarCommand extends commando.Command {
             .setTitle(`${member.user.tag}'s Avatar:`)
             .setColor(CONFIG.colours.yellow)
             .setImage(`${member.user.displayAvatarURL({ dynamic: true, size: 4096 })}`);
-        return msg.channel.send(embed);
+        void msg.channel.send(embed);
+
+
+        const log = new MessageEmbed()
+            .setTitle("Command used: Avatar")
+            .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}`)
+            .setColor(CONFIG.colours.yellow)
+            .setTimestamp();
+        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
+
+        const cuddlelog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
+        return cuddlelog.send(log);
+
     }
 
 }

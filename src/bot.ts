@@ -1,8 +1,10 @@
 import { Client, SQLiteProvider } from "discord.js-commando";
-import { CONFIG } from "./globals";
+import { CONFIG } from "./utils/globals";
 import { Collection } from "discord.js";
 import { Collections } from "./utils/types";
 import { Database } from "sqlite3";
+import { onCommandRun } from "./events/commandRun";
+import { onDelete } from "./events/onDelete";
 import { onGuildCreate } from "./events/guildCreate";
 import { onGuildDelete } from "./events/guildDelete";
 import { onMessage } from "./events/message";
@@ -31,15 +33,26 @@ async function main(): Promise<void> {
 
     client.on("guildDelete", (guild) => void onGuildDelete(client, guild));
 
+    client.on("commandRun", (cmd, _promise, msg) => void onCommandRun(cmd, msg));
+
+    client.on("messageDelete", (msg) => void onDelete(msg));
+
     // Registers all groups/commands/etc
-    client.registry.registerGroups([
-        ["group1", "first batch of commands"],
-        ["fun", "fun commands"],
-        ["utility", "useful commands"]
-    ]).registerDefaults()
+    client.registry.registerDefaultTypes()
+        .registerGroups([
+            ["group1", "first batch of commands"],
+            ["fun", "fun commands"],
+            ["utility", "useful commands"],
+            ["moderation", "commands used to moderate servers"]
+        ]).registerDefaultGroups()
+        .registerDefaultCommands({
+            unknownCommand: false
+        })
+
         .registerCommandsIn(
             path.join(__dirname, "commands")
         );
+
     void open({
         driver: Database,
         filename: path.join(__dirname, "../settings.sqlite3")
@@ -51,3 +64,4 @@ async function main(): Promise<void> {
 }
 
 main().catch(console.error);
+

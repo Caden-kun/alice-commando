@@ -1,13 +1,14 @@
-import { CONFIG, STORAGE } from "../globals";
-import { Client, Guild, MessageEmbed, TextChannel } from "discord.js";
+import { CONFIG, STORAGE } from "../utils/globals";
+import { Guild, MessageEmbed, TextChannel } from "discord.js";
 import { Collections } from "../utils/types";
+import { CommandoClient } from "discord.js-commando";
 
-export async function onReady(client: Client, col: Collections): Promise<void> {
+export async function onReady(client: CommandoClient, col: Collections): Promise<void> {
     console.log("Ready!");
     const users = client.users.cache.size;
     const activitiesList = [
         ` ${users} Users!`,
-        ` ${col.commands.size} commands!`,
+        ` ${client.registry.commands.size} commands!`,
         `alice invite || Watching over ${col.commands.size} commands!`,
         `over ${client.guilds.cache.size} Servers!`,
         "I am alive?",
@@ -22,7 +23,8 @@ export async function onReady(client: Client, col: Collections): Promise<void> {
     void client.user.setActivity(item, { type: "WATCHING" }); // Sets bot's activities to one of the phrases in the arraylist.
     const botboot = new MessageEmbed()
         .setTitle("Bot has booted successfully!")
-        .setDescription(`Total Users: **${users}** users\nTotal Servers: **${client.guilds.cache.size}** servers\n`)
+        .setDescription(`Total Users: **${users}** users\nTotal Servers: **${client.guilds.cache.size}** servers\n`
+        + `Total commands: **${client.registry.commands.size}** Commands`)
         .setColor(CONFIG.colours.green)
         .setTimestamp();
     const botlogserver: Guild = await client.guilds.fetch(STORAGE.botlogserver);
@@ -37,4 +39,3 @@ export async function onReady(client: Client, col: Collections): Promise<void> {
     }, 600000); // Runs this every 10 Minutes.
 }
 
-exports.onReady = onReady;

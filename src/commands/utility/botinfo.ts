@@ -1,9 +1,9 @@
 /* eslint-disable sort-keys */
 import * as commando from "discord.js-commando";
-import { CONFIG, STORAGE } from "../../globals";
-import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
+import { CONFIG, STORAGE } from "../../utils/globals";
+import { Message, MessageEmbed } from "discord.js";
 import { col } from "../../bot";
-export default class HiCommand extends commando.Command {
+export default class BotinfoCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
@@ -65,16 +65,6 @@ export default class HiCommand extends commando.Command {
                 { name: "\u200B", value: "\u200B", inline: true }
             )
             .setFooter("I miss Eugeo :(");
-        if (msg.guild === null) return msg.reply("there was an error?");
-        const botinfo = new MessageEmbed()
-            .setTitle("Command used: botinfo")
-            .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}`)
-            .setColor(CONFIG.colours.yellow)
-            .setTimestamp();
-        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
-
-        const botinfolog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
-        void msg.channel.send(embed);
-        return botinfolog.send(botinfo);
+        return msg.channel.send(embed);
     }
 }

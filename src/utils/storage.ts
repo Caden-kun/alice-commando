@@ -21,6 +21,8 @@ export default class Storage {
 
     public botlogchannel: string;
 
+    public botlogserver: string;
+
     public botupdates: string;
 
     public developers: string[];
@@ -36,6 +38,7 @@ export default class Storage {
 
     private constructor() {
         this.botupdates = "";
+        this.botlogserver = "";
         this.botlogchannel = "";
         this.developers = [""];
         this.guildjoins = "";

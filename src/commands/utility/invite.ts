@@ -1,6 +1,6 @@
 import * as commando from "discord.js-commando";
 import { Message, MessageEmbed } from "discord.js";
-import { CONFIG } from "../../globals";
+import { CONFIG } from "../../utils/globals";
 export default class InvCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {

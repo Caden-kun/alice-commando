@@ -1,6 +1,6 @@
 import * as commando from "discord.js-commando";
 import { Message, MessageEmbed } from "discord.js";
-import { getMember } from "../../utils";
+import { getMember } from "../../utils/getMember";
 import moment from "moment";
 const status = {
     dnd: "<:AH_StatusDnd:723216144680484955> Do Not Disturb",
