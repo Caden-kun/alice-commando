@@ -32,7 +32,9 @@ export default class Config {
 
     public readonly kickself: string;
 
-    public readonly owners: string;
+    public readonly owner: string;
+
+    public owners: string | string[] | Set<string> | undefined;
 
     public readonly prefix: string;
 
@@ -46,6 +48,7 @@ export default class Config {
         this.kickfailstaff = "";
         this.kickhelp = "";
         this.kickself = "";
+        this.owner = "";
         this.owners = "";
         this.prefix = "";
         this.token = "";

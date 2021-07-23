@@ -13,7 +13,7 @@ const status = {
 };
 
 
-export default class JoindateCommand extends commando.Command {
+export default class JoindatesCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
             args: [

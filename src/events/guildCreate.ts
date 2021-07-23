@@ -1,10 +1,10 @@
 import { CONFIG, STORAGE, discordLogo } from "../utils/globals";
-import { Guild, MessageEmbed, TextChannel } from "discord.js";
+import { Client, Guild, MessageEmbed, TextChannel } from "discord.js";
 
 
-export function onGuildCreate(guild: Guild): void {
+export function onGuildCreate(client: Client, guild: Guild): void {
     // This event triggers when the bot joins a guild.
-    const channelid = STORAGE.botlogchannel;
+    const channelid = STORAGE.guildjoins;
     let guildicon = null;
 
     guildicon = guild.iconURL({ dynamic: true });
@@ -19,6 +19,7 @@ export function onGuildCreate(guild: Guild): void {
         .addField("Server Name:", `> **${guild.name}**`, false)
         .addField("Server ID:", `> **${guild.id}**`, false)
         .addField("Total Members:", `> **${guild.memberCount}** Members`)
+        .addField("Total Bot Users:", `> **${client.users.cache.size}** users`)
         .setFooter("Owner Information- New Guild");
     const botLogs = guild.client.channels.cache.get(channelid) as TextChannel;
     void botLogs.send(newguild);

@@ -1,10 +1,26 @@
+/* eslint-disable sort-keys */
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable @typescript-eslint/strict-boolean-expressions */
 import * as commando from "discord.js-commando";
 import { CONFIG, discordLogo } from "../../utils/globals";
 import { Message, MessageEmbed } from "discord.js";
 import moment from "moment";
+const filterLevels = {
+    DISABLED: "Off",
+    ALL_MEMBERS: "Everyone",
+    MEMBERS_WITHOUT_ROLES: "No Role"
+};
 
-export default class JoindateCommand extends commando.Command {
+const verificationLevels = {
+    NONE: "None",
+    LOW: "Low",
+    MEDIUM: "Medium",
+    HIGH: "(╯°□°）╯︵ ┻━┻",
+    VERY_HIGH: "┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻"
+};
+
+
+export default class ServerinfoCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
@@ -52,8 +68,8 @@ export default class JoindateCommand extends commando.Command {
                 `**Owner:** ${msg.guild.owner?.user.tag} (${msg.guild.ownerID})`,
                 `**Region:** ${msg.guild.region}`,
                 `**Boost Tier:** ${msg.guild.premiumTier ? `Tier ${msg.guild.premiumTier}` : "None"}`,
-                `**Explicit Filter:** ${msg.guild.explicitContentFilter}`,
-                `**Verification Level:** ${msg.guild.verificationLevel}`,
+                `**Explicit Filter:** ${filterLevels[msg.guild.explicitContentFilter]}`,
+                `**Verification Level:** ${verificationLevels[msg.guild.verificationLevel]}`,
                 `**Time Created:** ${moment(msg.guild.createdTimestamp).format("LT")} ${moment(msg.guild.createdTimestamp).format("LL")} [${moment(msg.guild.createdTimestamp).fromNow()}]`,
                 "\u200b"
             ])

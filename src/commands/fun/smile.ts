@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message, MessageEmbed } from "discord.js";
+import { CONFIG, STORAGE } from "../../globals";
+import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
 
 export default class SmileCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -72,7 +73,16 @@ export default class SmileCommand extends commando.Command {
             .setColor("#EFFF00")
             .setImage(smile[Math.floor(Math.random() * smile.length)])
             .setDescription(`${msg.author.toString()} is smiling! ${smilereply[Math.floor(Math.random() * smilereply.length)]}`);
-        return msg.channel.send(embed);
+        const smilelogs = new MessageEmbed()
+            .setTitle("Command used: smile")
+            .setDescription(`User: ${msg.author} - ${msg.author.tag}\nServer ID: ${msg.guild.id}\nServer Name: ${msg.guild.name}`)
+            .setColor(CONFIG.colours.yellow)
+            .setTimestamp();
+        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botlogserver);
+
+        const smilelog: TextChannel = botlogserver.channels.cache.get(STORAGE.botlogchannel) as TextChannel;
+        void msg.channel.send(embed);
+        return smilelog.send(smilelogs);
 
     }
 

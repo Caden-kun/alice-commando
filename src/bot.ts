@@ -27,9 +27,9 @@ async function main(): Promise<void> {
 
     client.on("message", async (msg) => void onMessage(msg));
 
-    client.on("guildCreate", (guild) => void onGuildCreate(guild));
+    client.on("guildCreate", (guild) => void onGuildCreate(client, guild));
 
-    client.on("guildDelete", (guild) => void onGuildDelete(guild));
+    client.on("guildDelete", (guild) => void onGuildDelete(client, guild));
 
     // Registers all groups/commands/etc
     client.registry.registerGroups([
