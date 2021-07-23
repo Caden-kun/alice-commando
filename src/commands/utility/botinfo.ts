@@ -2,7 +2,6 @@
 import * as commando from "discord.js-commando";
 import { CONFIG, STORAGE } from "../../utils/globals";
 import { Message, MessageEmbed } from "discord.js";
-import { col } from "../../bot";
 export default class BotinfoCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
@@ -42,10 +41,7 @@ export default class BotinfoCommand extends commando.Command {
         const devid = CONFIG.dev;
         const dev = await msg.client.users.fetch(devid);
 
-        let size = 0;
-        col.commands.each(() => {
-            size ++;
-        });
+
         const embed = new MessageEmbed()
             .setColor(CONFIG.colours.yellow)
             .setTitle("Alice - Bot Info")
@@ -57,7 +53,7 @@ export default class BotinfoCommand extends commando.Command {
                 { name: "Total Channels:", value: `**${channels}** channels`, inline: true },
                 { name: "\u200B", value: "\u200B", inline: true },
                 { name: "Total Users:", value: `**${users}** total users`, inline: true },
-                { name: "Total Commands:", value: `**${size}** commands`, inline: true },
+                { name: "Total Commands:", value: `**${this.client.registry.commands.size}** commands`, inline: true },
                 { name: "\u200B", value: "\u200B", inline: true },
                 { name: "Latest Update:", value: `${STORAGE.botupdates}`, inline: false },
                 { name: "Bot Invite Link:", value: "[Click here](https://discord.com/api/oauth2/authorize?client_id=720809995628707902&permissions=8&scope=bot)", inline: true },
