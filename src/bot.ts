@@ -25,7 +25,7 @@ async function main(): Promise<void> {
     });
 
     // Runs the onReady function defined in ./events/ready
-    client.on("ready", () => void onReady(client, col));
+    client.on("ready", () => void onReady(client));
 
     client.on("message", async (msg) => void onMessage(msg));
 

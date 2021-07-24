@@ -40,7 +40,15 @@ export default class BotinfoCommand extends commando.Command {
         const owner = await msg.client.users.fetch(ownerid);
         const devid = CONFIG.dev;
         const dev = await msg.client.users.fetch(devid);
+        if (msg.client.uptime === null) return msg.reply("Uptime Error!");
+        let seconds = Math.floor(msg.client.uptime / 1000);
+        let minutes = Math.floor(seconds / 60);
+        let hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
 
+        seconds %= 60;
+        minutes %= 60;
+        hours %= 24;
 
         const embed = new MessageEmbed()
             .setColor(CONFIG.colours.yellow)
@@ -51,14 +59,14 @@ export default class BotinfoCommand extends commando.Command {
                 { name: "\u200B", value: "\u200B" },
                 { name: "Total Servers:", value: `**${guilds}** servers`, inline: true },
                 { name: "Total Channels:", value: `**${channels}** channels`, inline: true },
-                { name: "\u200B", value: "\u200B", inline: true },
+                { name: "Uptime:", value: `**${days}** days, **${hours}** hours, **${seconds}** seconds.`, inline: true },
                 { name: "Total Users:", value: `**${users}** total users`, inline: true },
                 { name: "Total Commands:", value: `**${this.client.registry.commands.size}** commands`, inline: true },
                 { name: "\u200B", value: "\u200B", inline: true },
                 { name: "Latest Update:", value: `${STORAGE.botupdates}`, inline: false },
                 { name: "Bot Invite Link:", value: "[Click here](https://discord.com/api/oauth2/authorize?client_id=720809995628707902&permissions=8&scope=bot)", inline: true },
                 { name: "Need help?", value: "[Join the Bot Support Server!](https://discord.gg/DsTsNCvumJ)", inline: true },
-                { name: "\u200B", value: "\u200B", inline: true }
+                { name: "Bot Source Code:", value: "[Go to Github!](https://github.com/Caden-kun/alice-commando)", inline: true }
             )
             .setFooter("I miss Eugeo :(");
         return msg.channel.send(embed);

@@ -1,15 +1,14 @@
 import { CONFIG, STORAGE } from "../utils/globals";
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
-import { Collections } from "../utils/types";
 import { CommandoClient } from "discord.js-commando";
 
-export async function onReady(client: CommandoClient, col: Collections): Promise<void> {
+export async function onReady(client: CommandoClient): Promise<void> {
     console.log("Ready!");
     const users = client.users.cache.size;
     const activitiesList = [
         ` ${users} Users!`,
         ` ${client.registry.commands.size} commands!`,
-        `alice invite || Watching over ${col.commands.size} commands!`,
+        `alice invite || Watching over ${client.registry.commands.size} commands!`,
         `over ${client.guilds.cache.size} Servers!`,
         "I am alive?",
         "alice invite"
