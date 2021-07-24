@@ -2,7 +2,7 @@ import { CONFIG, STORAGE } from "../utils/globals";
 import { Message, MessageEmbed, PartialMessage, TextChannel } from "discord.js";
 
 export async function onDelete(msg: Message | PartialMessage): Promise<void> {
-
+    if (msg.channel.type === "dm") return;
     const files = msg.attachments.array();
 
     const embed = new MessageEmbed()
@@ -11,6 +11,7 @@ export async function onDelete(msg: Message | PartialMessage): Promise<void> {
         // eslint-disable-next-line @typescript-eslint/no-base-to-string
         .setDescription(`Channel: ${msg.channel}\nMessage content: ${msg.content}`)
         .setColor(CONFIG.colours.red)
+        .setFooter(`Author: ${msg.author?.id} • Message ID: ${msg.id}`)
         .setTimestamp();
     if (msg.attachments.first() !== undefined) {
         embed.setImage(files[0].url);
