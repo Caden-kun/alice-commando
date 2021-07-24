@@ -8,7 +8,8 @@ export async function onDelete(msg: Message | PartialMessage): Promise<void> {
     const embed = new MessageEmbed()
         .setTitle("Message deleted!")
         .setAuthor(msg.author?.tag, msg.author?.displayAvatarURL({ dynamic: true, size: 4096 }))
-        .setDescription(`Message content: ${msg.content}`)
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
+        .setDescription(`Channel: ${msg.channel}\nMessage content: ${msg.content}`)
         .setColor(CONFIG.colours.red)
         .setTimestamp();
     if (msg.attachments.first() !== undefined) {

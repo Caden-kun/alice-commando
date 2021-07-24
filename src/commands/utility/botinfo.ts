@@ -59,7 +59,7 @@ export default class BotinfoCommand extends commando.Command {
                 { name: "\u200B", value: "\u200B" },
                 { name: "Total Servers:", value: `**${guilds}** servers`, inline: true },
                 { name: "Total Channels:", value: `**${channels}** channels`, inline: true },
-                { name: "Uptime:", value: `**${days}** days, **${hours}** hours, **${seconds}** seconds.`, inline: true },
+                { name: "Uptime:", value: `**${days}** days, **${hours}** hours, **${minutes}** minutes.`, inline: true },
                 { name: "Total Users:", value: `**${users}** total users`, inline: true },
                 { name: "Total Commands:", value: `**${this.client.registry.commands.size}** commands`, inline: true },
                 { name: "\u200B", value: "\u200B", inline: true },
