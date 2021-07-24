@@ -81,21 +81,15 @@ export default class EmbedCommand extends commando.Command {
     // Now to run the actual command, the run() parameters need to be defiend (by types and names)
     public async run(
         msg: commando.CommandoMessage,
-        { title, description, color, image }: { color: Message; description: Message; image: Message; title: Message;}
+        { title, description, color, image }: { color: string; description: string; image: string; title: string;}
     ): Promise<Message | Message[]> {
-
-        void title.delete();
-        void description.delete();
-        void color.delete();
-        void image.delete();
         void msg.delete();
-
-        if (image.content === "null") image.content = "https://yourmomgay.com";
+        if (image === "null") image = "https://yourmomgay.com";
         const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)
-            .setImage(image.content)
-            .setColor(color.content)
+            .setImage(image)
+            .setColor(color)
             .setFooter(`${msg.guild?.name} • ${msg.author.tag}`);
         return msg.channel.send(embed);
     }

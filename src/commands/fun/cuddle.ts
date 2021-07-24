@@ -13,6 +13,15 @@ export default class CuddleCommand extends commando.Command {
                     prompt: "Cuddling alone? I'm not allowing it! Who are you cuddling with? Please mention a user.",
 
                     type: "string"
+                },
+                {
+                    default: "",
+
+                    key: "addtext",
+
+                    prompt: "Anything you want to add?",
+
+                    type: "string"
                 }
             ],
 
@@ -38,7 +47,7 @@ export default class CuddleCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { cuddleuser }: { cuddleuser: string; }
+        { cuddleuser, addtext }: { addtext: string; cuddleuser: string; }
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
 
@@ -79,7 +88,8 @@ export default class CuddleCommand extends commando.Command {
         const embed = new MessageEmbed()
             .setColor("#EFFF00")
             .setImage(cuddle[Math.floor(Math.random() * cuddle.length)])
-            .setDescription(`${msg.author.toString()} is cuddling ${member.toString()}! ${cuddlereply[Math.floor(Math.random() * cuddlereply.length)]}`);
+            .setDescription(`${msg.author.toString()} is cuddling ${member.toString()}! ${cuddlereply[Math.floor(Math.random() * cuddlereply.length)]}`)
+            .setFooter(addtext);
         return msg.channel.send(embed);
 
 

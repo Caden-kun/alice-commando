@@ -13,7 +13,7 @@ export default class ModlogsetCommand extends commando.Command {
                 {
                     key: "modlogs",
 
-                    prompt: "Which channel do you want to recieve modlogs for? please provide a channel ID.",
+                    prompt: "Which channel do you want to recieve modlogs for? please provide a channel ID or mention a channel.",
 
                     type: "string"
                 }

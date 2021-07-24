@@ -13,6 +13,15 @@ export default class HugCommand extends commando.Command {
                     prompt: "You can't exactly hug alone! Who are you hugging? Please ping the user.",
 
                     type: "string"
+                },
+                {
+                    default: "",
+
+                    key: "addtext",
+
+                    prompt: "Anything you want to add?",
+
+                    type: "string"
                 }
             ],
 
@@ -38,7 +47,7 @@ export default class HugCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { huguser }: { huguser: string; }
+        { huguser, addtext }: { addtext: string; huguser: string; }
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
 
@@ -120,7 +129,8 @@ export default class HugCommand extends commando.Command {
         const embed = new MessageEmbed()
             .setColor("#EFFF00")
             .setImage(hugs[Math.floor(Math.random() * hugs.length)])
-            .setDescription(`${msg.author.toString()} has given ${member.toString()} a hug!`);
+            .setDescription(`${msg.author.toString()} has given ${member.toString()} a hug!`)
+            .setFooter(addtext);
         return msg.channel.send(embed);
 
     }

@@ -14,6 +14,15 @@ export default class SlapCommand extends commando.Command {
                     prompt: "Who deserves this painful slap from you? (mention a user)",
 
                     type: "string"
+                },
+                {
+                    default: "",
+
+                    key: "addtext",
+
+                    prompt: "Anything you want to add?",
+
+                    type: "string"
                 }
             ],
 
@@ -39,7 +48,7 @@ export default class SlapCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { slapuser }: { slapuser: string; }
+        { slapuser, addtext }: { addtext: string; slapuser: string; }
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
 
@@ -79,7 +88,8 @@ export default class SlapCommand extends commando.Command {
         const embed = new MessageEmbed()
             .setColor(CONFIG.colours.yellow)
             .setImage(slap[Math.floor(Math.random() * slap.length)])
-            .setDescription(`${msg.author.toString()} gave ${member.toString()} a slap! ${slapreply[Math.floor(Math.random() * slapreply.length)]}`);
+            .setDescription(`${msg.author.toString()} gave ${member.toString()} a slap! ${slapreply[Math.floor(Math.random() * slapreply.length)]}`)
+            .setFooter(addtext);
         return msg.channel.send(embed);
 
 
