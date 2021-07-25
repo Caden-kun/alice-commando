@@ -25,7 +25,6 @@ export default class StatsCommand extends commando.Command {
 
             guildOnly: true,
 
-
             memberName: "stats",
 
             name: "stats",

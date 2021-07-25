@@ -31,7 +31,7 @@ export default class SetupdateCommand extends commando.Command {
 
             name: "setupdate",
 
-            ownerOnly: false,
+            ownerOnly: true,
 
             throttling: {
                 duration: 60,
