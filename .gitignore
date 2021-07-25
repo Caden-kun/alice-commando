@@ -3,3 +3,4 @@ build
 node_modules
 storage.yml
 logtemplate.ts
+json.sqlite
