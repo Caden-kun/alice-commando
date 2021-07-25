@@ -19,7 +19,7 @@ export default class ModlogremoveCommand extends commando.Command {
                 }
             ],
 
-            description: "Server Admins can set modlog channels to recieve deleted message logs.",
+            description: "Server Admins can remove channels from getting logs.",
 
             group: "moderation",
 
@@ -49,12 +49,12 @@ export default class ModlogremoveCommand extends commando.Command {
         const channel = getChannel(delmodlogs, msg.guild);
         if (channel === undefined) return msg.say("Please give me a **valid** channel");
 
-        const foundIndex = STORAGE.modlogs.findIndex((a) => a === `${channel.id}`);
+        const chmodlog = STORAGE.modlogs.findIndex((a) => a.serverID === msg.guild?.id);
+        if (chmodlog === -1) {
+            return msg.reply("This server does not have a modlog channel set!");
+        }
 
-        if (foundIndex === -1)
-            return msg.reply(`${channel} is not set as a modlog channel! Please try again.`);
-
-        STORAGE.modlogs.splice(foundIndex, 1);
+        STORAGE.modlogs.splice(chmodlog, 1);
         console.log(STORAGE.modlogs);
         Storage.saveConfig();
         return msg.say(`${channel} has been removed from logs!`);

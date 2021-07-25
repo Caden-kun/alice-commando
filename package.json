@@ -36,7 +36,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/KingOKarma/typescript-discord-bot-template.git"
+    "url": "https://github.com/Caden-kun/alice-commando"
   },
-  "author": "Caden-kun"
+  "author": "Caden-kun",
+  "license": "MIT"
 }

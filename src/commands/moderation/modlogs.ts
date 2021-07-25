@@ -48,11 +48,14 @@ export default class ModlogsetCommand extends commando.Command {
 
         const channel = getChannel(modlogs, msg.guild);
 
+
         if (channel === undefined) return msg.say("Please give me a **valid** channel");
+        const modGuild = STORAGE.modlogs.find((c) => c.serverID === msg.guild?.id);
+        if (modGuild !== undefined)
+            return msg.reply("You already have modlog channel set in the server!");
 
-        if (STORAGE.modlogs.includes(channel.id)) return msg.say("That channel is already on the modlogs list!");
 
-        STORAGE.modlogs.push(channel.id);
+        STORAGE.modlogs.push({ channelID: channel.id, serverID: msg.guild.id });
         Storage.saveConfig();
         return msg.say(`${channel} has been set! if this` +
         " appears as an invalid channel, please check if the channel ID is correct.");

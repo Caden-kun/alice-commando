@@ -9,6 +9,10 @@ export interface Roles {
     userID: string;
 
 }
+export interface ModLogs {
+    channelID: string;
+    serverID: string;
+}
 
 
 /**
@@ -29,7 +33,7 @@ export default class Storage {
 
     public guildjoins: string;
 
-    public modlogs: string[];
+    public modlogs: ModLogs[];
 
     public qotdchannel: string;
 
@@ -43,7 +47,7 @@ export default class Storage {
         this.botlogchannel = "";
         this.developers = [""];
         this.guildjoins = "";
-        this.modlogs = [""];
+        this.modlogs = [{ channelID: "", serverID: "" }];
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";

@@ -20,7 +20,7 @@ export async function onDelete(msg: Message | PartialMessage): Promise<void> {
     const channels = STORAGE.modlogs;
 
     channels.forEach((ch) => {
-        const channel = msg.guild?.channels.cache.get(ch) as TextChannel | undefined;
+        const channel = msg.guild?.channels.cache.get(ch.channelID) as TextChannel | undefined;
 
         if (channel === undefined) return;
 
