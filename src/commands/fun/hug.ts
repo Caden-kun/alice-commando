@@ -1,4 +1,5 @@
 import * as commando from "discord.js-commando";
+import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
 import { getMember } from "../../utils/getMember";
 
@@ -125,12 +126,19 @@ export default class HugCommand extends commando.Command {
             "https://cdn.discordapp.com/attachments/857396944740286507/863527787301306411/hug68.gif",
             "https://cdn.discordapp.com/attachments/857396944740286507/863527798878240768/hug69.gif"
         ];
+        db.add(`${msg.author.id}_hugs${member.id}`, 1);
 
+        const commandused = db.get(`${msg.author.id}_hugs${member.id}`);
+
+        let desc = `${msg.author.toString()} has given ${member.toString()} a hug!`;
+
+        if (msg.author.id === member.id) desc = "Take this hug from me! <:AH_AoHappy:709052933521670275>";
         const embed = new MessageEmbed()
             .setColor("#EFFF00")
             .setImage(hugs[Math.floor(Math.random() * hugs.length)])
-            .setDescription(`${msg.author.toString()} has given ${member.toString()} a hug!`)
-            .setFooter(addtext);
+            .setDescription(desc)
+            .setFooter(`${addtext} • That's ${commandused} hugs now!`)
+            .setTimestamp();
         return msg.channel.send(embed);
 
     }

@@ -1,11 +1,12 @@
 import * as commando from "discord.js-commando";
+import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
 import { getMember } from "../../utils/getMember";
-
 export default class CuddleCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
+            aliases: ["cuddles", "cubbles", "cubble"],
             args: [
                 {
                     key: "cuddleuser",
@@ -85,11 +86,19 @@ export default class CuddleCommand extends commando.Command {
 
 
         ];
+        db.add(`${msg.author.id}_cuddles${member.id}`, 1);
+
+        const commandused = db.get(`${msg.author.id}_cuddles${member.id}`);
+
+        let desc = `${msg.author.toString()} is cuddling ${member.toString()}! ${cuddlereply[Math.floor(Math.random() * cuddlereply.length)]}`;
+
+        if (msg.author.id === member.id) desc = "Awww, cmhere! Take this cuddle from me :pleading_face:";
         const embed = new MessageEmbed()
             .setColor("#EFFF00")
             .setImage(cuddle[Math.floor(Math.random() * cuddle.length)])
-            .setDescription(`${msg.author.toString()} is cuddling ${member.toString()}! ${cuddlereply[Math.floor(Math.random() * cuddlereply.length)]}`)
-            .setFooter(addtext);
+            .setDescription(desc)
+            .setFooter(`${addtext} • That's ${commandused} cuddles now!`)
+            .setTimestamp();
         return msg.channel.send(embed);
 
 

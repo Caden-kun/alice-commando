@@ -1,9 +1,22 @@
 import * as commando from "discord.js-commando";
+import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
 
 export default class SmileCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
+
+            args: [
+                {
+                    default: "",
+
+                    key: "addtext",
+
+                    prompt: "additional text?",
+
+                    type: "string"
+                }
+            ],
 
             clientPermissions: ["SEND_MESSAGES"],
 
@@ -26,7 +39,8 @@ export default class SmileCommand extends commando.Command {
     }
 
     public async run(
-        msg: commando.CommandoMessage
+        msg: commando.CommandoMessage,
+        { addtext }: { addtext: string;}
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
 
@@ -67,11 +81,16 @@ export default class SmileCommand extends commando.Command {
 
 
         ];
+        db.add(`${msg.author.id}_slaps`, 1);
+
+        const commandused = db.get(`${msg.author.id}_smiles`);
 
         const embed = new MessageEmbed()
             .setColor("#EFFF00")
             .setImage(smile[Math.floor(Math.random() * smile.length)])
-            .setDescription(`${msg.author.toString()} is smiling! ${smilereply[Math.floor(Math.random() * smilereply.length)]}`);
+            .setDescription(`${msg.author.toString()} is smiling! ${smilereply[Math.floor(Math.random() * smilereply.length)]}`)
+            .setFooter(`${addtext} • That's ${commandused} smiles now! Keep on smiling!`)
+            .setTimestamp();
         return msg.channel.send(embed);
 
     }

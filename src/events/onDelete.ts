@@ -3,6 +3,7 @@ import { Message, MessageEmbed, PartialMessage, TextChannel } from "discord.js";
 
 export async function onDelete(msg: Message | PartialMessage): Promise<void> {
     if (msg.channel.type === "dm") return;
+    if (msg.author?.bot === true) return;
     const files = msg.attachments.array();
 
     const embed = new MessageEmbed()

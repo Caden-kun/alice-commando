@@ -1,4 +1,5 @@
 import * as commando from "discord.js-commando";
+import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
 import { CONFIG } from "../../utils/globals";
 import { getMember } from "../../utils/getMember";
@@ -85,11 +86,19 @@ export default class SlapCommand extends commando.Command {
 
 
         ];
+        db.add(`${msg.author.id}_slaps${member.id}`, 1);
+
+        const commandused = db.get(`${msg.author.id}_slaps${member.id}`);
+
+        let desc = `${msg.author.toString()} gave ${member.toString()} a slap! ${slapreply[Math.floor(Math.random() * slapreply.length)]}`;
+
+        if (msg.author.id === member.id) desc = "I mean, if you insist, then take this slap from me :((";
         const embed = new MessageEmbed()
             .setColor(CONFIG.colours.yellow)
             .setImage(slap[Math.floor(Math.random() * slap.length)])
-            .setDescription(`${msg.author.toString()} gave ${member.toString()} a slap! ${slapreply[Math.floor(Math.random() * slapreply.length)]}`)
-            .setFooter(addtext);
+            .setDescription(desc)
+            .setFooter(`${addtext} • That's ${commandused} slaps now! :(`)
+            .setTimestamp();
         return msg.channel.send(embed);
 
 

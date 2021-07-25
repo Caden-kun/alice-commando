@@ -50,7 +50,8 @@ export default class RedditCommand extends commando.Command {
                 .setColor("#EFFF00")
                 .setImage(res.url)
                 .setTitle(res.title)
-                .setDescription(`From [r/${subreddit}](https://reddit.com/r/${subreddit})`);
+                .setDescription(`From [r/${subreddit}](https://reddit.com/r/${subreddit})`)
+                .setTimestamp();
             const m = await msg.channel.send(loading);
             return m.edit(loaded);
 
