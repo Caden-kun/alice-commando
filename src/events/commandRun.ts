@@ -9,7 +9,6 @@ export async function onCommandRun(cmd: Command, msg: CommandoMessage): Promise<
 
     if (msg.channel.type === "dm") desc = `User: ${msg.author} - ${msg.author.tag}`;
     db.add(`${cmd.name}`, 1);
-    console.log(cmd.name);
     const botlogevent = new MessageEmbed()
         .setTitle(msg.channel.type === "dm" ? `Command used: ${cmd.name} (DM)` : `Command used: ${cmd.name}`)
         .setDescription(desc)

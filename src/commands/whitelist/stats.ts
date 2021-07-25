@@ -45,7 +45,7 @@ export default class StatsCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { cmdgroup }: { cmdgroup: string; }
     ): Promise<Message | Message[]> {
-
+        // Fun commands
         const cuddlestats = db.get("cuddle");
         const hugstats = db.get("hug");
         const patstats = db.get("pat");
@@ -53,9 +53,20 @@ export default class StatsCommand extends commando.Command {
         const redditstats = db.get("reddit");
         const slapstats = db.get("slap");
         const smilestats = db.get("smile");
-
+        // Moderation
+        const delmodlogs = db.get("removelogs");
         const modlogstats = db.get("setmodlogs");
-
+        //  Utility
+        const avatarstats = db.get("avatar");
+        const botinfostats = db.get("botinfo");
+        const embedstats = db.get("embed");
+        const histats = db.get("hi");
+        const invstats = db.get("invite");
+        const joinstats = db.get("joindates");
+        const serverinfstats = db.get("serverinfo");
+        const setqotdstats = db.get("setqotd");
+        const uptimestats = db.get("uptime");
+        const whoisstats = db.get("whois");
 
         switch (cmdgroup.toLowerCase()) {
             case "fun":
@@ -68,6 +79,8 @@ export default class StatsCommand extends commando.Command {
                 // eslint-disable-next-line no-case-declarations
                 const embed = new MessageEmbed()
                     .setTitle(`Command Stats: ${cmdgroup}`)
+                    .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
+                    .setColor(CONFIG.colours.yellow)
                     .setDescription(statcmd)
                     .setFooter(msg.author.tag)
                     .setTimestamp();
@@ -75,19 +88,35 @@ export default class StatsCommand extends commando.Command {
             case "moderation":
                 // eslint-disable-next-line no-case-declarations
                 let modstatcmd = "null";
-                modstatcmd = `Setmodlogs Command Usage: ${modlogstats}`;
+                modstatcmd = `Setmodlogs Command Usage: ${modlogstats}\n Removemodlogs Command Usage: ${delmodlogs}`;
                 // eslint-disable-next-line no-case-declarations
                 const modembed = new MessageEmbed()
                     .setTitle(`Command Stats: ${cmdgroup}`)
+                    .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
                     .setColor(CONFIG.colours.yellow)
                     .setDescription(modstatcmd)
                     .setFooter(msg.author.tag)
                     .setTimestamp();
                 return msg.channel.send(modembed);
-
+            case "utility":
+                // eslint-disable-next-line no-case-declarations
+                let utilstatcmds = "null";
+                utilstatcmds = `Avatar Command Usage: ${avatarstats}\nBotinfo Command Usage: ${botinfostats}\n
+                Embed Command Usage: ${embedstats}\nHi Command Usage: ${histats}\n
+                Invite Command Usage: ${invstats}\nJoindates Command Usage: ${joinstats}\n
+                Server Info Command Usage: ${serverinfstats}\nSetQotd Command Usage: ${setqotdstats}\n
+                Uptime Command Usage: ${uptimestats}\nWhois Command Usage: ${whoisstats}\n`;
+                // eslint-disable-next-line no-case-declarations
+                const utilstatcmd = new MessageEmbed()
+                    .setTitle(`Command Stats: ${cmdgroup}`)
+                    .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
+                    .setColor(CONFIG.colours.yellow)
+                    .setDescription(utilstatcmds)
+                    .setFooter(msg.author.tag)
+                    .setTimestamp();
+                return msg.channel.send(utilstatcmd);
             default:
-                void msg.client.user?.setStatus("dnd");
-                return msg.channel.send("Status set to dnd");
+                return msg.channel.send("Please select a group!");
         }
     }
 }
