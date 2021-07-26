@@ -14,6 +14,10 @@ export interface ModLogs {
     serverID: string;
 }
 
+export interface WarnLogs {
+    channelID: string;
+    serverID: string;
+}
 
 /**
  * This represents the storage.yml
@@ -41,6 +45,8 @@ export default class Storage {
 
     public qotdserver: string;
 
+    public warnlogs: WarnLogs[];
+
     private constructor() {
         this.botupdates = "";
         this.botlogserver = "";
@@ -51,6 +57,7 @@ export default class Storage {
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";
+        this.warnlogs = [{ channelID: "", serverID: "" }];
 
 
     }
