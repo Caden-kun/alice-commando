@@ -7,7 +7,7 @@ export default class ModlogsetCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["modlog"],
+            aliases: ["setlogs", ""],
 
             args: [
                 {
@@ -25,9 +25,9 @@ export default class ModlogsetCommand extends commando.Command {
 
             guildOnly: true,
 
-            memberName: "setmodlogs",
+            memberName: "setlogs",
 
-            name: "setmodlogs",
+            name: "setlogs",
 
             ownerOnly: false,
 

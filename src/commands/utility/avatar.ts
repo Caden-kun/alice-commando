@@ -10,6 +10,7 @@ export default class AvatarCommand extends commando.Command {
             aliases: ["av", "pfp"],
             args: [
                 {
+                    default: "",
                     key: "userID",
                     prompt: "Please ping or provide an ID of the user!",
                     type: "string"
@@ -49,8 +50,10 @@ export default class AvatarCommand extends commando.Command {
 
         }
         if (member === null)
-            return msg.reply("mention a user!");
-
+            // eslint-disable-next-line prefer-destructuring
+            member = msg.member;
+        if (member === null)
+            return msg.reply("there was a problem?");
         const embed = new MessageEmbed()
             .setTitle(`${member.user.tag}'s Avatar:`)
             .setColor(CONFIG.colours.yellow)
