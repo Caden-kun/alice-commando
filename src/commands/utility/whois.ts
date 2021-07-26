@@ -96,7 +96,8 @@ export default class WhoisCommand extends commando.Command {
         if (perms === "") {
             perms = "No Perms";
         }
-        const warncounts = db.get(`${member.id}_${msg.guild.id}_warns`);
+        let warncounts = db.get(`${member.id}_${msg.guild.id}_warns`);
+        if (warncounts === null) warncounts = "0";
         const joinDiscord = moment(member.user.createdAt).format("llll");
         const joinServer = moment(member.joinedAt).format("llll");
         const embed = new MessageEmbed()
