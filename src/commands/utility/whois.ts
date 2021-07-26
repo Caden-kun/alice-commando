@@ -19,6 +19,8 @@ export default class WhoisCommand extends commando.Command {
 
             args: [
                 {
+                    default: "",
+
                     key: "whouser",
 
                     prompt: "Who do you want to get info about? Please ping or provide an ID!",
