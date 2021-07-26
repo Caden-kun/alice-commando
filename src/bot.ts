@@ -43,7 +43,8 @@ async function main(): Promise<void> {
             ["group1", "first batch of commands"],
             ["fun", "fun commands"],
             ["utility", "useful commands"],
-            ["moderation", "commands used to moderate servers"]
+            ["moderation", "commands used to moderate servers"],
+            ["logging", "commands used to set log channels"]
         ]).registerDefaultGroups()
         .registerDefaultCommands({
             unknownCommand: false

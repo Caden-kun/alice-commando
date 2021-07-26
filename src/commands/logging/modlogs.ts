@@ -7,7 +7,7 @@ export default class ModlogsetCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["setlogs", ""],
+            aliases: ["setlogs"],
 
             args: [
                 {
@@ -21,7 +21,7 @@ export default class ModlogsetCommand extends commando.Command {
 
             description: "Server Admins can set modlog channels to recieve deleted message logs.",
 
-            group: "moderation",
+            group: "logging",
 
             guildOnly: true,
 

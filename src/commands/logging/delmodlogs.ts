@@ -3,15 +3,15 @@ import { Message } from "discord.js";
 import { STORAGE } from "../../utils/globals";
 import Storage from "../../utils/storage";
 import { getChannel } from "../../utils/getChannel";
-export default class WarnlogremoveCommand extends commando.Command {
+export default class ModlogremoveCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["removewarnlog"],
+            aliases: ["delmodlog"],
 
             args: [
                 {
-                    key: "delwarnlog",
+                    key: "delmodlogs",
 
                     prompt: "Please mention the channel you are removing logs from!",
 
@@ -19,15 +19,15 @@ export default class WarnlogremoveCommand extends commando.Command {
                 }
             ],
 
-            description: "Server Admins can remove a channel from warning logs.",
+            description: "Server Admins can remove channels from getting mod logs.",
 
-            group: "moderation",
+            group: "logging",
 
             guildOnly: true,
 
-            memberName: "delwarnlogs",
+            memberName: "removelogs",
 
-            name: "delwarnlogs",
+            name: "removelogs",
 
             ownerOnly: false,
 
@@ -42,20 +42,21 @@ export default class WarnlogremoveCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { delwarnlog }: { delwarnlog: string; }
+        { delmodlogs }: { delmodlogs: string; }
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.say("There was an error?");
 
-        const channel = getChannel(delwarnlog, msg.guild);
+        const channel = getChannel(delmodlogs, msg.guild);
         if (channel === undefined) return msg.say("Please give me a **valid** channel");
 
-        const chmodlog = STORAGE.warnlogs.findIndex((a) => a.serverID === msg.guild?.id);
+        const chmodlog = STORAGE.modlogs.findIndex((a) => a.serverID === msg.guild?.id);
         if (chmodlog === -1) {
             return msg.reply("This server does not have a modlog channel set!");
         }
 
-        STORAGE.warnlogs.splice(chmodlog, 1);
+        STORAGE.modlogs.splice(chmodlog, 1);
+        console.log(STORAGE.modlogs);
         Storage.saveConfig();
-        return msg.say(`${channel} has been removed from warn logs!`);
+        return msg.say(`${channel} has been removed from logs!`);
     }
 }
