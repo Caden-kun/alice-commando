@@ -35,7 +35,7 @@ export default class ModlogsetCommand extends commando.Command {
                 duration: 60,
                 usages: 1
             },
-            userPermissions: ["ADMINISTRATOR"]
+            userPermissions: ["MANAGE_GUILD"]
 
         });
     }

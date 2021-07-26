@@ -38,7 +38,7 @@ export default class EmbedCommand extends commando.Command {
 
             clientPermissions: ["MANAGE_MESSAGES"],
 
-            description: "I can say whatever the user wants!",
+            description: "Creates an embed for the user",
 
             group: "utility",
 

@@ -1,4 +1,5 @@
 import * as commando from "discord.js-commando";
+import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
 import { getMember } from "../../utils/getMember";
 import moment from "moment";
@@ -95,7 +96,7 @@ export default class WhoisCommand extends commando.Command {
         if (perms === "") {
             perms = "No Perms";
         }
-
+        const warncounts = db.get(`${member.id}_${msg.guild.id}_warns`);
         const joinDiscord = moment(member.user.createdAt).format("llll");
         const joinServer = moment(member.joinedAt).format("llll");
         const embed = new MessageEmbed()
@@ -104,6 +105,7 @@ export default class WhoisCommand extends commando.Command {
             .setColor(member.displayColor)
             .setThumbnail(`${member.user.displayAvatarURL({ dynamic: true })}`)
             .addField("Joined at:", `${joinServer}`, true)
+            .addField("Current Warns Count:", `${warncounts} Warnings`)
             .addField("Account Created:", `${joinDiscord}`, false)
             .addField("Status:", presenceString, true)
             .addField("Permissions:", perms)
