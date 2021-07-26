@@ -68,8 +68,8 @@ export default class WarnCommand extends commando.Command {
 
         }
 
-        db.add(`${member.id}_warns`, 1);
-        const warncount = db.get(`${member.id}_warns`);
+        db.add(`${member.id}_${msg.guild.id}_warns`, 1);
+        const warncount = db.get(`${member.id}_${msg.guild.id}_warns`);
         const embed = new MessageEmbed()
             .setTitle(`${member.user.tag} has been warned!`)
             .setDescription(`Reason: **${warnreason}**\nModerator:${msg.author.tag} - ${msg.author.toString()}\nWarns: **${warncount}** warnings`)
