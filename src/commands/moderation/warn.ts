@@ -64,7 +64,7 @@ export default class WarnCommand extends commando.Command {
             return msg.reply("Mention a user!");
         }
         if (member.id === msg.author.id) {
-            return msg.reply("dumbass you cannot warn yourself!");
+            return msg.reply("You can't warn yourself!");
 
         }
 

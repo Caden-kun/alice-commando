@@ -19,7 +19,7 @@ export default class ModlogremoveCommand extends commando.Command {
                 }
             ],
 
-            description: "Server Admins can remove channels from getting logs.",
+            description: "Server Admins can remove channels from getting mod logs.",
 
             group: "moderation",
 

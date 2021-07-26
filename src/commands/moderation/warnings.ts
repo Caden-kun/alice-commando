@@ -20,7 +20,7 @@ export default class WarnCommand extends commando.Command {
                 }
             ],
 
-            description: "Server Admins can set modlog channels to recieve deleted message logs.",
+            description: "Shows the number of warns a user has.",
 
             group: "moderation",
 
