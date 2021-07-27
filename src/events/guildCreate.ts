@@ -20,7 +20,7 @@ export function onGuildCreate(client: Client, guild: Guild): void {
         .addField("Server ID:", `> **${guild.id}**`, false)
         .addField("Total Members:", `> **${guild.memberCount}** Members`)
         .addField("Total Bot Users:", `> **${client.users.cache.size}** users`)
-        .setFooter("Owner Information- New Guild");
+        .setFooter(`Serving ${client.guilds.cache.size} servers!`);
     const botLogs = guild.client.channels.cache.get(channelid) as TextChannel;
     void botLogs.send(newguild);
 
