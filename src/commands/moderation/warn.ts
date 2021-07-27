@@ -40,7 +40,7 @@ export default class WarnCommand extends commando.Command {
 
             throttling: {
                 duration: 60,
-                usages: 1
+                usages: 5
             },
             userPermissions: ["MANAGE_MESSAGES"]
 
