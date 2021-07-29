@@ -1,4 +1,5 @@
-import { Client, SQLiteProvider } from "discord.js-commando";
+import * as qdb from "quick.db";
+import { Client, CommandoMessage, Inhibition, SQLiteProvider } from "discord.js-commando";
 import { CONFIG } from "./utils/globals";
 import { Collection } from "discord.js";
 import { Collections } from "./utils/types";
@@ -11,6 +12,7 @@ import { onMessage } from "./events/message";
 import { onReady } from "./events/ready";
 import { open } from "sqlite";
 import path from "path";
+
 export const col: Collections = {
     aliases: new Collection(),
     commands: new Collection(),
@@ -36,6 +38,19 @@ async function main(): Promise<void> {
     client.on("commandRun", (cmd, _promise, msg) => void onCommandRun(cmd, msg));
 
     client.on("messageDelete", (msg) => void onDelete(msg));
+
+    client.dispatcher.addInhibitor((msg: CommandoMessage) => {
+        const botbanuser = qdb.get(`botban_${msg.author.id}`);
+        if (botbanuser === true) {
+            const inhibit: Inhibition = {
+                reason: "You have been banned from using Alice.",
+                response: msg.say("You have been banned from using alice."
+                + "\nYou can appeal the ban by joining the support server here: https://discord.gg/DsTsNCvumJ")
+            };
+            return inhibit;
+        }
+        return false;
+    });
 
     // Registers all groups/commands/etc
     client.registry.registerDefaultTypes()
