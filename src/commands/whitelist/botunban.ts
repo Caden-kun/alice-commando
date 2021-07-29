@@ -1,7 +1,7 @@
 import * as commando from "discord.js-commando";
 import * as db from "quick.db";
 import { Message } from "discord.js";
-import { getMember } from "../../utils/getMember";
+import { getUser } from "../../utils/getUser";
 export default class BotBanCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
@@ -44,13 +44,14 @@ export default class BotBanCommand extends commando.Command {
         { botunbanuserID }: {botunbanuserID: string;}
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.say("there was an error?");
-        const member = await getMember(botunbanuserID, msg.guild);
-        const botbanuser = db.get(`botban_${member?.id}`);
-        console.log(botbanuser);
+        const user = await getUser(botunbanuserID, msg.client);
+        if (user === null)
+            return msg.reply("Please provide a valid ID!");
+        const botbanuser = db.get(`botban_${user.id}`);
         if (botbanuser === null)
-            return msg.reply(`${member?.user.tag} is on the ban list!`);
+            return msg.reply(`${user.tag} is on the ban list!`);
         if (botbanuser === true)
-            db.delete(`botban_${member?.id}`);
-        return msg.say(`${member?.user.tag} has been unbanned from using the bot!`);
+            db.delete(`botban_${user.id}`);
+        return msg.say(`${user.tag} has been unbanned from using the bot!`);
     }
 }
