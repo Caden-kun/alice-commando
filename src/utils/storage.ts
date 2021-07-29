@@ -27,6 +27,10 @@ export interface WarnLogs {
 export default class Storage {
     private static readonly _configLocation = "./storage.yml";
 
+    public botbanchannel: string;
+
+    public botbanserver: string;
+
     public botlogchannel: string;
 
     public botlogserver: string;
@@ -48,6 +52,8 @@ export default class Storage {
     public warnlogs: WarnLogs[];
 
     private constructor() {
+        this.botbanserver = "";
+        this.botbanchannel = "";
         this.botupdates = "";
         this.botlogserver = "";
         this.botlogchannel = "";

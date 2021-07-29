@@ -49,9 +49,9 @@ export default class BotBanCommand extends commando.Command {
             return msg.reply("Please provide a valid ID!");
         const botbanuser = db.get(`botban_${user.id}`);
         if (botbanuser === null)
-            return msg.reply(`${user.tag} is on the ban list!`);
+            return msg.reply(`**${user.tag}** is on the ban list!`);
         if (botbanuser === true)
             db.delete(`botban_${user.id}`);
-        return msg.say(`${user.tag} has been unbanned from using the bot!`);
+        return msg.say(`**${user.tag}** has been unbanned from using the bot!`);
     }
 }
