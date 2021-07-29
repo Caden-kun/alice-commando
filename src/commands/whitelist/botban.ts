@@ -45,11 +45,13 @@ export default class BotBanCommand extends commando.Command {
     ): Promise<Message | Message[]> {
         if (msg.guild === null) return msg.say("there was an error?");
         const member = await getMember(botbanuserID, msg.guild);
-        const botbanuser = db.get(`botbanuser_${member?.id}`);
+        if (member === null)
+            return msg.reply("Please provide a valid ID!");
+        const botbanuser = db.get(`botban_${member.id}`);
         if (botbanuser === true)
-            return msg.reply(`${member?.user.tag} is already banned from the bot!`);
+            return msg.reply(`${member.user.tag} is already banned from the bot!`);
         if (botbanuser === null)
-            db.set(`botban_${member?.id}`, true);
-        return msg.say(`${member?.user.tag} has been banned from using the bot!`);
+            db.set(`botban_${member.id}`, true);
+        return msg.say(`${member.user.tag} has been banned from using the bot!`);
     }
 }
