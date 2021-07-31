@@ -81,7 +81,7 @@ export default class WarnCommand extends commando.Command {
             .setColor(CONFIG.colours.red)
             .setFooter("You may not appeal this ban.")
             .setTimestamp();
-        const channels = STORAGE.warnlogs;
+        const channels = STORAGE.modlogs;
 
         channels.forEach((ch) => {
             const channel = msg.guild?.channels.cache.get(ch.channelID) as TextChannel | undefined;
