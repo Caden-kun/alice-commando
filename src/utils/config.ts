@@ -39,6 +39,7 @@ export default class Config {
     public readonly prefix: string;
 
     public readonly token: string;
+    public topGGKey: string;
 
     private constructor() {
         this.colours = { blue: "", green: "", red: "", yellow: "" };
@@ -50,6 +51,7 @@ export default class Config {
         this.kickself = "";
         this.owner = "";
         this.prefix = "";
+        this.topGGKey = "";
         this.token = "";
 
     }

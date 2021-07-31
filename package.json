@@ -4,6 +4,7 @@
   "description": "Up-to-date code for alice but in commando.",
   "main": "bot.ts",
   "dependencies": {
+    "@top-gg/sdk": "^3.1.2",
     "discord.js": "^12.5.3",
     "discord.js-commando": "^0.11.1",
     "fs": "0.0.1-security",
@@ -17,6 +18,7 @@
     "random-questions": "^1.0.1",
     "sqlite": "^4.0.23",
     "sqlite3": "^5.0.2",
+    "topgg-autoposter": "^2.0.0",
     "tsc": "^1.20150623.0",
     "twitter-v2": "^1.1.0",
     "typescript": "^4.3.4"

@@ -4,6 +4,7 @@ import { CONFIG } from "./utils/globals";
 import { Collection } from "discord.js";
 import { Collections } from "./utils/types";
 import { Database } from "sqlite3";
+import { onAutoPoster } from "./events/autoposter";
 import { onCommandRun } from "./events/commandRun";
 import { onDelete } from "./events/onDelete";
 import { onGuildCreate } from "./events/guildCreate";
@@ -28,6 +29,8 @@ async function main(): Promise<void> {
 
     // Runs the onReady function defined in ./events/ready
     client.on("ready", () => void onReady(client));
+
+    client.on("ready", () => void onAutoPoster(client));
 
     client.on("message", async (msg) => void onMessage(msg));
 
