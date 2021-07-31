@@ -23,7 +23,7 @@ export async function onReady(client: CommandoClient): Promise<void> {
     const botboot = new MessageEmbed()
         .setTitle("Bot has booted successfully!")
         .setDescription(`Total Users: **${users}** users\nTotal Servers: **${client.guilds.cache.size}** servers\n`
-        + `Total commands: **${client.registry.commands.size}** Commands`)
+        + `Total commands: **${client.registry.commands.filter((c) => !c.ownerOnly).size}** Commands`)
         .setColor(CONFIG.colours.green)
         .setTimestamp();
     const botlogserver: Guild = await client.guilds.fetch(STORAGE.botlogserver);
