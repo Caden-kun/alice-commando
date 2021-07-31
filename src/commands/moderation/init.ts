@@ -34,7 +34,7 @@ export default class ModlogsetCommand extends commando.Command {
                 }
             ],
 
-            description: "Server Admins can set modlog channels to recieve deleted message logs.",
+            description: "Simple setup command to add logs seamlessly.",
 
             group: "logging",
 
