@@ -1,7 +1,7 @@
 import * as commando from "discord.js-commando";
+import { CONFIG, dbllink, topgglink } from "../../utils/globals";
 import { Message, MessageEmbed } from "discord.js";
-import { CONFIG } from "../../utils/globals";
-export default class HiCommand extends commando.Command {
+export default class UpvoteCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
@@ -37,7 +37,7 @@ export default class HiCommand extends commando.Command {
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true }))
             .setColor(CONFIG.colours.yellow)
             .setDescription("\n**You can upvote her on either one of these sites, or even both if you want!**\n"
-            + "[top.gg](https://top.gg/bot/720809995628707902/vote) \n[Discord Bot List](https://discordbotlist.com/bots/alice-zuberg)")
+            + `[top.gg](${topgglink}) \n[Discord Bot List](${dbllink})`)
             .setFooter("Thank you for upvoting!")
             .setTimestamp();
         return msg.say(embed);
