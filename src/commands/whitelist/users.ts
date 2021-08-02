@@ -38,7 +38,7 @@ export default class MemberCountCommand extends commando.Command {
             .setColor(CONFIG.colours.yellow)
             .setTitle("Guild Count:")
             .setThumbnail(msg.author.displayAvatarURL({ dynamic: true, size: 1024 }))
-            .setDescription(`I am serving **${msg.client.guilds.cache.size}** servers! :D`)
+            .setDescription(`I am serving **${msg.client.users.cache.size}** servers! :D`)
             .setTimestamp();
         return msg.channel.send(embed);
     }
