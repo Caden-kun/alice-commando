@@ -9,6 +9,7 @@ import { onCommandRun } from "./events/commandRun";
 import { onDelete } from "./events/onDelete";
 import { onGuildCreate } from "./events/guildCreate";
 import { onGuildDelete } from "./events/guildDelete";
+import { onLiveCounter } from "./events/livecounter";
 import { onMessage } from "./events/message";
 import { onReady } from "./events/ready";
 import { open } from "sqlite";
@@ -28,7 +29,7 @@ async function main(): Promise<void> {
     });
 
     // Runs the onReady function defined in ./events/ready
-    client.on("ready", () => void onReady(client));
+    client.on("ready", async () => void onReady(client));
 
     client.on("ready", () => void onAutoPoster(client));
 

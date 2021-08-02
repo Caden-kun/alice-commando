@@ -33,10 +33,9 @@ export default class MemberCountCommand extends commando.Command {
         msg: commando.CommandoMessage
     ): Promise<Message | Message[]> {
 
-
         const embed = new MessageEmbed()
             .setColor(CONFIG.colours.yellow)
-            .setTitle("Guild Count:")
+            .setTitle("Member Count:")
             .setThumbnail(msg.author.displayAvatarURL({ dynamic: true, size: 1024 }))
             .setDescription(`I am serving **${msg.client.users.cache.size}** users!`)
             .setTimestamp();
