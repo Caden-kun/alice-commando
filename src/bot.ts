@@ -9,7 +9,6 @@ import { onCommandRun } from "./events/commandRun";
 import { onDelete } from "./events/onDelete";
 import { onGuildCreate } from "./events/guildCreate";
 import { onGuildDelete } from "./events/guildDelete";
-import { onLiveCounter } from "./events/livecounter";
 import { onMessage } from "./events/message";
 import { onReady } from "./events/ready";
 import { open } from "sqlite";
