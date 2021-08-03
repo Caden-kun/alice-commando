@@ -52,8 +52,7 @@ export default class WarnCommand extends commando.Command {
         if (member === null) {
             return msg.reply("mention a user!");
         }
-        db.get(`${member.id}_${msg.guild.id}_warns`);
-        let warncount = db.get(`${member.id}_warns`);
+        let warncount = db.get(`${member.id}_${msg.guild.id}_warns`);
         if (warncount === null)
             warncount = "0";
         return msg.reply(`**${member.user.tag}** has **${warncount}** warnings!`);

@@ -4,12 +4,14 @@ import { CONFIG } from "./utils/globals";
 import { Collection } from "discord.js";
 import { Collections } from "./utils/types";
 import { Database } from "sqlite3";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { messageUpdate } from "./events/onMessageEdit";
 import { onAutoPoster } from "./events/autoposter";
 import { onCommandRun } from "./events/commandRun";
 import { onDelete } from "./events/onDelete";
 import { onGuildCreate } from "./events/guildCreate";
-import { onGuildDelete } from "./events/guildDelete";
-import { onMessage } from "./events/message";
+import { onGuildDelete } from "./events/onGuildDelete";
+import { onMessage } from "./events/onMessage";
 import { onReady } from "./events/ready";
 import { open } from "sqlite";
 import path from "path";
@@ -33,6 +35,8 @@ async function main(): Promise<void> {
     client.on("ready", () => void onAutoPoster(client));
 
     client.on("message", async (msg) => void onMessage(msg));
+
+    // Client.on("messageUpdate", async (newMsg, oldMsg) => void messageUpdate(newMsg, oldMsg));
 
     client.on("guildCreate", (guild) => void onGuildCreate(client, guild));
 

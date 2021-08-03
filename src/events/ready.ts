@@ -8,10 +8,11 @@ export async function onReady(client: CommandoClient): Promise<void> {
     const activitiesList = [
         ` ${users} Users!`,
         ` ${client.registry.commands.size} commands!`,
-        `alice invite || Watching over ${client.registry.commands.size} commands!`,
+        `alice invite - Watching over ${client.registry.commands.size} commands!`,
         `over ${client.guilds.cache.size} Servers!`,
         "I am alive?",
-        "alice invite"
+        "alice invite",
+        "alice upvote"
 
 
     ]; // Creates an arraylist containing phrases you want your bot to switch through.
