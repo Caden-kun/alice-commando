@@ -73,7 +73,7 @@ export default class WarnCommand extends commando.Command {
             .setTitle(`${member.user.tag} has been Banned!`)
             .setDescription(`Reason: **${banreason}**\nModerator:${msg.author.tag} - ${msg.author.toString()}`)
             .setColor(CONFIG.colours.red)
-            .setFooter("Someone has been naughty!")
+            .setFooter(`Member ID: ${member.id}`)
             .setTimestamp();
         const dmembed = new MessageEmbed()
             .setTitle(`You have been banned from ${msg.guild.name}!`)
