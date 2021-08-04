@@ -36,7 +36,7 @@ async function main(): Promise<void> {
 
     client.on("message", async (msg) => void onMessage(msg));
 
-    // Client.on("messageUpdate", async (newMsg, oldMsg) => void messageUpdate(newMsg, oldMsg));
+    client.on("messageUpdate", async (newMsg, oldMsg) => void messageUpdate(newMsg, oldMsg));
 
     client.on("guildCreate", (guild) => void onGuildCreate(client, guild));
 

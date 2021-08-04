@@ -1,18 +1,20 @@
 import { CONFIG, STORAGE } from "../utils/globals";
-import { Message, MessageEmbed, TextChannel } from "discord.js";
+import { Message, MessageEmbed, PartialMessage, TextChannel } from "discord.js";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function messageUpdate(oldMsg: Message, newMsg: Message): Promise<void> {
+export async function messageUpdate(oldMsg: Message | PartialMessage, newMsg: Message | PartialMessage): Promise<void> {
     if (oldMsg.channel.type === "dm") return;
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-boolean-literal-compare
-    if (oldMsg.author.bot === true) return;
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+    if (oldMsg.author === null)
+        return void console.log("there was an error.");
+    if (oldMsg.author.bot) return;
     const files = oldMsg.attachments.array();
 
     const embed = new MessageEmbed()
         .setTitle("Message edited!")
         .setAuthor(oldMsg.author.tag, oldMsg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
         // eslint-disable-next-line @typescript-eslint/no-base-to-string
-        .setDescription(`Channel: ${oldMsg.channel}\nOld Message: ${oldMsg}\n Edited Message: ${newMsg}`)
+        .setDescription(`**Channel:** ${oldMsg.channel}\n**Old Message:** ${oldMsg}\n **Edited Message:** ${newMsg}`)
         .setColor(CONFIG.colours.red)
         .setFooter(`Author: ${oldMsg.author.id} • Message ID: ${oldMsg.id}`)
         .setTimestamp();

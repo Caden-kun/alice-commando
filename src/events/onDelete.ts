@@ -10,7 +10,7 @@ export async function onDelete(msg: Message | PartialMessage): Promise<void> {
         .setTitle("Message deleted!")
         .setAuthor(msg.author?.tag, msg.author?.displayAvatarURL({ dynamic: true, size: 4096 }))
         // eslint-disable-next-line @typescript-eslint/no-base-to-string
-        .setDescription(`Channel: ${msg.channel}\nMessage content: ${msg.content}`)
+        .setDescription(`**Channel:** ${msg.channel}\n**Message content:** ${msg.content}`)
         .setColor(CONFIG.colours.red)
         .setFooter(`Author: ${msg.author?.id} • Message ID: ${msg.id}`)
         .setTimestamp();
