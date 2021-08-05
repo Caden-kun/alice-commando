@@ -82,6 +82,7 @@ export default class AddRoleCommand extends commando.Command {
         }
         const embed = new MessageEmbed()
             .setTitle(`Role Added to ${member.user.tag}!`)
+            .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
             .setDescription(`Role: <@&${rIDParsed}>\nUser: **${member.user.tag}** - ${member.toString()}\nModerator: ${msg.author.tag} - ${msg.author.toString()}`)
             .setColor(CONFIG.colours.green)
             .setFooter(`Role ID: ${rIDParsed}`)

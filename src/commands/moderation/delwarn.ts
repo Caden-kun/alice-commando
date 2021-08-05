@@ -64,6 +64,7 @@ export default class DelWarnCommand extends commando.Command {
             return msg.reply(`${member.user.tag} has no warnings!`);
         const embed = new MessageEmbed()
             .setTitle(`${member.user.tag} has had a warning removed!`)
+            .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
             .setDescription(`Moderator: ${msg.author.tag} - ${msg.author.toString()}\nWarns: **${warncount}** warnings`)
             .setColor(CONFIG.colours.green)
             .setTimestamp();
