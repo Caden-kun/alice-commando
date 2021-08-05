@@ -8,8 +8,8 @@ export async function messageUpdate(oldMsg: Message | PartialMessage, newMsg: Me
     if (oldMsg.author === null)
         return void console.log("there was an error.");
     if (oldMsg.author.bot) return;
-    const files = oldMsg.attachments.array();
-
+    if (oldMsg === newMsg)
+        return void console.log("lol");
     const embed = new MessageEmbed()
         .setTitle("Message edited!")
         .setAuthor(oldMsg.author.tag, oldMsg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
@@ -18,9 +18,6 @@ export async function messageUpdate(oldMsg: Message | PartialMessage, newMsg: Me
         .setColor(CONFIG.colours.red)
         .setFooter(`Author: ${oldMsg.author.id} • Message ID: ${oldMsg.id}`)
         .setTimestamp();
-    if (oldMsg.attachments.first() !== undefined) {
-        embed.setImage(files[0].url);
-    }
     const channels = STORAGE.modlogs;
 
     channels.forEach((ch) => {
