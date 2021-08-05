@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message, Role } from "discord.js";
+import { CONFIG, STORAGE } from "../../utils/globals";
+import { Message, MessageEmbed, Role, TextChannel } from "discord.js";
 import { getMember } from "../../utils/getMember";
 export default class AddRoleCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -73,6 +74,22 @@ export default class AddRoleCommand extends commando.Command {
             radd = member.guild.roles.cache.find((role) => role.id === rIDParsed) as Role;
             void await member.roles.add(rIDParsed);
             void msg.reply(`I have added the role to **${member.user.tag}**!`);
+            const embed = new MessageEmbed()
+                .setTitle(`Role Added to ${member.user.tag}!`)
+                .setDescription(`Role: <@&${rIDParsed}>\nUser: **${member.user.tag}** - ${member.toString()}\nModerator: ${msg.author.tag} - ${msg.author.toString()}`)
+                .setColor(CONFIG.colours.green)
+                .setFooter(`Role ID: ${rIDParsed}`)
+                .setTimestamp();
+            const channels = STORAGE.modlogs;
+
+            channels.forEach((ch) => {
+                const channel = msg.guild?.channels.cache.get(ch.channelID) as TextChannel | undefined;
+
+                if (channel === undefined) return;
+
+                return channel.send(embed);
+
+            });
         } catch (err) {
             console.log(radd);
             return msg.reply(`I could not add that role to **${member.user.tag}**.` +
