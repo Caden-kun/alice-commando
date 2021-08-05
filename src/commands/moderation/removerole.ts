@@ -5,13 +5,13 @@ export default class AddRoleCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["roleadd", "role"],
+            aliases: ["roleremove", "rrole"],
 
             args: [
                 {
                     key: "roleuser",
 
-                    prompt: "Please ping a user to add the role to.",
+                    prompt: "Please ping a user to remove the role from.",
 
                     type: "string"
                 },
@@ -19,21 +19,21 @@ export default class AddRoleCommand extends commando.Command {
 
                     key: "roleid",
 
-                    prompt: "What role am I adding to the user? (Please ping the role or provide the ID).",
+                    prompt: "What role am I removing from the user? (Please ping the role or provide the ID).",
 
                     type: "string"
                 }
             ],
 
-            description: "I add a role to a user.",
+            description: "I remove a role from a user.",
 
             group: "moderation",
 
             guildOnly: true,
 
-            memberName: "addrole",
+            memberName: "removerole",
 
-            name: "addrole",
+            name: "removerole",
 
             ownerOnly: false,
 
@@ -67,16 +67,16 @@ export default class AddRoleCommand extends commando.Command {
             return msg.reply("There was an error?");
         let radd;
         try {
-            if (member.roles.cache.find((r) => r.id === rIDParsed)) {
-                return msg.reply("The user already has that role!");
+            if (!member.roles.cache.find((r) => r.id === rIDParsed)) {
+                return msg.reply("The user does not have that role!");
             }
             radd = member.guild.roles.cache.find((role) => role.id === rIDParsed) as Role;
-            void await member.roles.add(rIDParsed);
-            void msg.reply(`I have added the role to **${member.user.tag}**!`);
+            void await member.roles.remove(rIDParsed);
+            void msg.reply(`I have removed the role from **${member.user.tag}**!`);
         } catch (err) {
             console.log(radd);
-            return msg.reply(`I could not add that role to **${member.user.tag}**.` +
-            " Please check if my role is higher than the role and user you are trying to add.");
+            return msg.reply(`I could not remove that role from **${member.user.tag}**.` +
+            " Please check if my role is higher than the role and user you are trying to remove.");
         }
         return msg;
     }
