@@ -61,7 +61,7 @@ export default class DelWarnCommand extends commando.Command {
         let warncount = db.get(`${member.id}_${msg.guild.id}_warns`);
         if (warncount === null) warncount = "0";
         if (warncount === "0")
-            return msg.reply(`${member.user.tag} has no warnings!`);
+            return msg.reply(`**${member.user.tag}** has no warnings!`);
         const embed = new MessageEmbed()
             .setTitle(`${member.user.tag} has had a warning removed!`)
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
