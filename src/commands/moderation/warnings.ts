@@ -1,6 +1,7 @@
 import * as commando from "discord.js-commando";
 import * as db from "quick.db";
-import { Message } from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
+import { CONFIG } from "../../utils/globals";
 import { getMember } from "../../utils/getMember";
 export default class WarnCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -53,9 +54,15 @@ export default class WarnCommand extends commando.Command {
             return msg.reply("mention a user!");
         }
         let warncount = db.get(`${member.id}_${msg.guild.id}_warns`);
-        if (warncount === null)
+        let warncolor = CONFIG.colours.red;
+        if (warncount === null) {
             warncount = "0";
-        return msg.reply(`**${member.user.tag}** has **${warncount}** warnings!`);
+            warncolor = CONFIG.colours.green;
+            console.log(warncolor);
+        }
+        const rembed = new MessageEmbed()
+            .setDescription(`**${member.user.tag}** has **${warncount}** warnings!`)
+            .setColor(warncolor);
+        return msg.channel.send(rembed);
     }
 }
-

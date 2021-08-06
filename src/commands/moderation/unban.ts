@@ -62,6 +62,7 @@ export default class UnbanCommand extends commando.Command {
         }
         let bans;
         try {
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             bans = await msg.guild?.fetchBan(unbanuser);
 
         } catch (err) {
@@ -82,9 +83,15 @@ export default class UnbanCommand extends commando.Command {
             return channel.send(embed);
 
         });
-        console.log(bans);
         void msg.guild?.members.unban(unbanuser, unbanreason);
-        return msg.say("User has been unbanned");
+        let description = `**<@!${unbanuser}>** was unbanned! Reason: **${unbanreason}**`;
+        if (unbanreason === "No reason provided")
+            description = `<@!${unbanuser}> was unbanned.`;
+
+        const unbanembed = new MessageEmbed()
+            .setDescription(description)
+            .setColor(CONFIG.colours.yellow);
+        return msg.channel.send(unbanembed);
 
 
     }

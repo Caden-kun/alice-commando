@@ -1,6 +1,6 @@
 import * as commando from "discord.js-commando";
-import { Message } from "discord.js";
-import { STORAGE } from "../../utils/globals";
+import { CONFIG, STORAGE } from "../../utils/globals";
+import { Message, MessageEmbed } from "discord.js";
 import Storage from "../../utils/storage";
 import { getChannel } from "../../utils/getChannel";
 export default class ModlogsetCommand extends commando.Command {
@@ -79,6 +79,9 @@ export default class ModlogsetCommand extends commando.Command {
         STORAGE.modlogs.push({ channelID: modlog.id, serverID: msg.guild.id });
         STORAGE.warnlogs.push({ channelID: warnlog.id, serverID: msg.guild.id });
         Storage.saveConfig();
-        return msg.say(`The following channels has been set!\nMod Logs: ${modlog}\nWarning Logs:${warnlog}`);
+        const initembed = new MessageEmbed()
+            .setDescription(`The following channels has been set!\nMod Logs: ${modlog}\nWarning Logs:${warnlog}`)
+            .setColor(CONFIG.colours.green);
+        return msg.channel.send(initembed);
     }
 }

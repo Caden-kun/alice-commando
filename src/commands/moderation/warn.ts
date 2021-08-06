@@ -93,7 +93,10 @@ export default class WarnCommand extends commando.Command {
 
         });
         void member.send(dmembed);
-        return msg.reply(`**${member.user.tag}** has been warned.`);
+        const warnembed = new MessageEmbed()
+            .setDescription(`**${member.user.tag}** has been warned.`)
+            .setColor(CONFIG.colours.yellow);
+        return msg.channel.send(warnembed);
     }
 }
 

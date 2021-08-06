@@ -94,7 +94,14 @@ export default class WarnCommand extends commando.Command {
         await member.send(dmembed);
         member.ban({ days: 0, reason: `${banreason}` })
             .catch(async (error) => msg.reply(`Ban failed.\n Reason: **${error}**`));
-        return msg.say(`**${member.user.tag}** was banned.`);
+        let description = `**${member.user.tag}** was banned for **${banreason}**`;
+        if (banreason === "No reason provided")
+            description = `**${member.user.tag}** was banned.`;
+
+        const banembed = new MessageEmbed()
+            .setDescription(description)
+            .setColor(CONFIG.colours.yellow);
+        return msg.channel.send(banembed);
     }
 }
 

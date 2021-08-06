@@ -69,15 +69,24 @@ export default class AddRoleCommand extends commando.Command {
         let radd;
         try {
             if (!member.roles.cache.find((r) => r.id === rIDParsed)) {
-                return msg.reply("The user does not have that role!");
+                const rrnembed = new MessageEmbed()
+                    .setDescription(`**${member.user.tag}** does not have <@&${rIDParsed}> role.`)
+                    .setColor(CONFIG.colours.red);
+                return msg.channel.send(rrnembed);
             }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             radd = member.guild.roles.cache.find((role) => role.id === rIDParsed) as Role;
             void await member.roles.remove(rIDParsed);
+            const rrembed = new MessageEmbed()
+                .setDescription(`Role <@&${rIDParsed}> successfully removed from **${member.user.tag}**!`)
+                .setColor(CONFIG.colours.green);
+            void msg.channel.send(rrembed);
             void msg.reply(`I have removed the role from **${member.user.tag}**!`);
         } catch (err) {
-            console.log(radd);
-            return msg.reply(`I could not remove that role from **${member.user.tag}**.` +
-            " Please check if my role is higher than the role and user you are trying to remove.");
+            const rreembed = new MessageEmbed()
+                .setDescription(`I could not remove <@&${rIDParsed}> role from **${member.user.tag}**. Please check if my role is higher than the role and user you are trying to remove.`)
+                .setColor(CONFIG.colours.red);
+            return msg.channel.send(rreembed);
         }
         const embed = new MessageEmbed()
             .setTitle(`Role Removed from ${member.user.tag}!`)

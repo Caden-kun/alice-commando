@@ -78,7 +78,10 @@ export default class DelWarnCommand extends commando.Command {
             return channel.send(embed);
 
         });
-        return msg.reply(`**${member.user.tag}**'s warning was deleted. Total Warnings: ${warncount}`);
+        const delwarnembed = new MessageEmbed()
+            .setDescription(`**${member.user.tag}**'s warning was deleted. \nTotal Warnings: ${warncount}`)
+            .setColor(CONFIG.colours.yellow);
+        return msg.channel.send(delwarnembed);
     }
 }
 

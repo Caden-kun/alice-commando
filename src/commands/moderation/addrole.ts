@@ -71,6 +71,7 @@ export default class AddRoleCommand extends commando.Command {
             if (member.roles.cache.find((r) => r.id === rIDParsed)) {
                 return msg.reply("The user already has that role!");
             }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             radd = member.guild.roles.cache.find((role) => role.id === rIDParsed) as Role;
             void await member.roles.add(rIDParsed);
             const rembed = new MessageEmbed()
@@ -79,9 +80,10 @@ export default class AddRoleCommand extends commando.Command {
             void msg.channel.send(rembed);
 
         } catch (err) {
-            console.log(radd);
-            return msg.reply(`I could not add that role to **${member.user.tag}**.` +
-            " Please check if my role is higher than the role and user you are trying to add.");
+            const raembed = new MessageEmbed()
+                .setDescription(`I could not add that role to **${member.user.tag}**. Please check if my role is higher than the role and user you are trying to add.`)
+                .setColor(CONFIG.colours.red);
+            return msg.channel.send(raembed);
         }
         const embed = new MessageEmbed()
             .setTitle(`Role Added to ${member.user.tag}!`)
