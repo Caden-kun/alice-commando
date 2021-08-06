@@ -8,8 +8,6 @@ export async function messageUpdate(oldMsg: Message | PartialMessage, newMsg: Me
     if (oldMsg.author === null)
         return void console.log("there was an error.");
     if (oldMsg.author.bot) return;
-    if (oldMsg === newMsg)
-        return void console.log("lol");
     const embed = new MessageEmbed()
         .setTitle("Message edited!")
         .setAuthor(oldMsg.author.tag, oldMsg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
@@ -24,7 +22,8 @@ export async function messageUpdate(oldMsg: Message | PartialMessage, newMsg: Me
         const channel = oldMsg.guild?.channels.cache.get(ch.channelID) as TextChannel | undefined;
 
         if (channel === undefined) return;
-
+        if (oldMsg.content === newMsg.content)
+            return;
         return channel.send(embed);
 
     });

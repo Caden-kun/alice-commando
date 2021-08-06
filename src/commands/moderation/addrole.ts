@@ -73,7 +73,10 @@ export default class AddRoleCommand extends commando.Command {
             }
             radd = member.guild.roles.cache.find((role) => role.id === rIDParsed) as Role;
             void await member.roles.add(rIDParsed);
-            void msg.reply(`I have added the role to **${member.user.tag}**!`);
+            const rembed = new MessageEmbed()
+                .setDescription(`Role <@&${rIDParsed}> successfully added to **${member.user.tag}**`)
+                .setColor(CONFIG.colours.yellow);
+            void msg.channel.send(rembed);
 
         } catch (err) {
             console.log(radd);
