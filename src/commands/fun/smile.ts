@@ -81,7 +81,7 @@ export default class SmileCommand extends commando.Command {
 
 
         ];
-        db.add(`${msg.author.id}_slaps`, 1);
+        db.add(`${msg.author.id}_smiles`, 1);
 
         const commandused = db.get(`${msg.author.id}_smiles`);
 
