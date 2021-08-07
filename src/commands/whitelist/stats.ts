@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as commando from "discord.js-commando";
 import * as db from "quick.db";
 
@@ -48,11 +49,18 @@ export default class StatsCommand extends commando.Command {
         const cuddlestats = db.get("cuddle");
         const hugstats = db.get("hug");
         const patstats = db.get("pat");
-        const qotdstats = db.get("qotd");
         const redditstats = db.get("reddit");
         const slapstats = db.get("slap");
         const smilestats = db.get("smile");
         // Moderation
+        const addrolelogs = db.get("addrole");
+        const removerolelogs = db.get("removerole");
+        const deletewarnlogs = db.get("delwarn");
+        const initlogs = db.get("init");
+        const unbanlogs = db.get("unban");
+        const warnlogs = db.get("warn");
+        const warningslogs = db.get("warnings");
+        // Logs
         const delmodlogs = db.get("removelogs");
         const modlogstats = db.get("setmodlogs");
         //  Utility
@@ -63,7 +71,7 @@ export default class StatsCommand extends commando.Command {
         const invstats = db.get("invite");
         const joinstats = db.get("joindates");
         const serverinfstats = db.get("serverinfo");
-        const setqotdstats = db.get("setqotd");
+        const topicstats = db.get("topic");
         const uptimestats = db.get("uptime");
         const whoisstats = db.get("whois");
 
@@ -72,8 +80,7 @@ export default class StatsCommand extends commando.Command {
                 // eslint-disable-next-line no-case-declarations
                 let statcmd = "null";
                 statcmd = `Cuddle Command Usage: ${cuddlestats}\nHug Command Usage: ${hugstats}\n
-                Headpat Command Usage: ${patstats}\nQOTD Command Usage: ${qotdstats}\n
-                Reddit Command Usage: ${redditstats}\nSlap Command Usage: ${slapstats}\n
+                Headpat Command Usage: ${patstats}\nReddit Command Usage: ${redditstats}\nSlap Command Usage: ${slapstats}\n
                 Smile Command Usage: ${smilestats}\n`;
                 // eslint-disable-next-line no-case-declarations
                 const embed = new MessageEmbed()
@@ -84,10 +91,23 @@ export default class StatsCommand extends commando.Command {
                     .setFooter(msg.author.tag)
                     .setTimestamp();
                 return msg.channel.send(embed);
+            case "logs":
+                // eslint-disable-next-line no-case-declarations
+                let logstatcmd = "null";
+                logstatcmd = `Setmodlogs Command Usage: ${modlogstats}\n Removemodlogs Command Usage: ${delmodlogs}`;
+                // eslint-disable-next-line no-case-declarations
+                const logembed = new MessageEmbed()
+                    .setTitle(`Command Stats: ${cmdgroup}`)
+                    .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
+                    .setColor(CONFIG.colours.yellow)
+                    .setDescription(logstatcmd)
+                    .setFooter(msg.author.tag)
+                    .setTimestamp();
+                return msg.channel.send(logembed);
             case "moderation":
                 // eslint-disable-next-line no-case-declarations
                 let modstatcmd = "null";
-                modstatcmd = `Setmodlogs Command Usage: ${modlogstats}\n Removemodlogs Command Usage: ${delmodlogs}`;
+                modstatcmd = `Addrole Command Usage: ${addrolelogs}\n Removemodlogs Command Usage: ${delmodlogs}\n`;
                 // eslint-disable-next-line no-case-declarations
                 const modembed = new MessageEmbed()
                     .setTitle(`Command Stats: ${cmdgroup}`)
@@ -103,8 +123,7 @@ export default class StatsCommand extends commando.Command {
                 utilstatcmds = `Avatar Command Usage: ${avatarstats}\nBotinfo Command Usage: ${botinfostats}\n
                 Embed Command Usage: ${embedstats}\nHi Command Usage: ${histats}\n
                 Invite Command Usage: ${invstats}\nJoindates Command Usage: ${joinstats}\n
-                Server Info Command Usage: ${serverinfstats}\nSetQotd Command Usage: ${setqotdstats}\n
-                Uptime Command Usage: ${uptimestats}\nWhois Command Usage: ${whoisstats}\n`;
+                Server Info Command Usage: ${serverinfstats}\nUptime Command Usage: ${uptimestats}\nWhois Command Usage: ${whoisstats}\n`;
                 // eslint-disable-next-line no-case-declarations
                 const utilstatcmd = new MessageEmbed()
                     .setTitle(`Command Stats: ${cmdgroup}`)
