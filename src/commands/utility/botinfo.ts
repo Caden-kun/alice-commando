@@ -62,11 +62,12 @@ export default class BotinfoCommand extends commando.Command {
                 { name: "Uptime:", value: `**${days}** days, **${hours}** hours, **${minutes}** minutes.`, inline: true },
                 { name: "Total Users:", value: `**${users}** total users`, inline: true },
                 { name: "Total Commands:", value: `**${this.client.registry.commands.size}** commands`, inline: true },
-                { name: "Trello:", value: "[Click here](https://trello.com/b/ZrkXBDGo/alice-zuberg)", inline: true },
+                { name: "Coding Language:", value: "**TypeScript**", inline: true },
                 { name: "Latest Update:", value: `${STORAGE.botupdates}`, inline: false },
                 { name: "Bot Invite Link:", value: "[Click here](https://discord.com/api/oauth2/authorize?client_id=720809995628707902&permissions=8&scope=bot)", inline: true },
                 { name: "Need help?", value: "[Join the Bot Support Server!](https://discord.gg/DsTsNCvumJ)", inline: true },
-                { name: "Bot Source Code:", value: "[Go to Github!](https://github.com/Caden-kun/alice-commando)", inline: true }
+                { name: "Bot Source Code:", value: "[Go to Github!](https://github.com/Caden-kun/alice-commando)", inline: true },
+                { name: "Trello:", value: "[Click here](https://trello.com/b/ZrkXBDGo/alice-zuberg)", inline: true }
             )
             .setFooter("I miss Eugeo :(");
         return msg.channel.send(embed);
