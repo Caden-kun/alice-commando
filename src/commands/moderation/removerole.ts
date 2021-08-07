@@ -81,7 +81,6 @@ export default class AddRoleCommand extends commando.Command {
                 .setDescription(`Role <@&${rIDParsed}> successfully removed from **${member.user.tag}**!`)
                 .setColor(CONFIG.colours.green);
             void msg.channel.send(rrembed);
-            void msg.reply(`I have removed the role from **${member.user.tag}**!`);
         } catch (err) {
             const rreembed = new MessageEmbed()
                 .setDescription(`I could not remove <@&${rIDParsed}> role from **${member.user.tag}**. Please check if my role is higher than the role and user you are trying to remove.`)
