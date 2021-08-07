@@ -9,7 +9,7 @@ export default class MemberCountCommand extends commando.Command {
 
             description: "shows how many members the bot is serving!",
 
-            group: "utility",
+            group: "group1",
 
             guildOnly: true,
 

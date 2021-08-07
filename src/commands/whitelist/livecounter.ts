@@ -8,7 +8,7 @@ export default class HiCommand extends commando.Command {
 
             description: "bot live uptime",
 
-            group: "utility",
+            group: "group1",
 
             guildOnly: false,
 

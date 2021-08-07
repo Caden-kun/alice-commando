@@ -9,7 +9,7 @@ export default class GuildCountCommand extends commando.Command {
 
             description: "shows how many servers the bot is in!",
 
-            group: "utility",
+            group: "group1",
 
             guildOnly: true,
 

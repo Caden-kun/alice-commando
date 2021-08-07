@@ -8,7 +8,7 @@ export default class GuildleaveCommand extends commando.Command {
 
             description: "I say hi back :D",
 
-            group: "utility",
+            group: "group1",
 
             guildOnly: true,
 
