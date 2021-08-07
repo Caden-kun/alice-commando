@@ -54,6 +54,7 @@ export default class BotinfoCommand extends commando.Command {
             .setColor(CONFIG.colours.yellow)
             .setTitle("Alice - Bot Info")
             .setDescription(`Alice Zuberg is owned and created by ${owner} **${owner.tag}**`)
+            .setImage("https://top.gg/api/widget/720809995628707902.png")
             .addFields(
                 { name: "Developers:", value: `**${owner} - ${owner.tag}** (Main Developer)\n**${dev} - ${dev.tag}** (Co-Developer)` },
                 { name: "\u200B", value: "\u200B" },

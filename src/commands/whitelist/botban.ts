@@ -32,7 +32,6 @@ export default class BotBanCommand extends commando.Command {
 
             guildOnly: true,
 
-
             memberName: "botban",
 
             name: "botban",
