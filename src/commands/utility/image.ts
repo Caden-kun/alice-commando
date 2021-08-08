@@ -5,8 +5,6 @@ export default class ImageCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["i"],
-
             args: [
                 {
                     key: "image",
