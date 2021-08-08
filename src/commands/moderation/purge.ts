@@ -1,7 +1,7 @@
 import * as commando from "discord.js-commando";
 import { CONFIG, STORAGE } from "../../utils/globals";
 import { Message, MessageEmbed, TextChannel } from "discord.js";
-export default class WarnCommand extends commando.Command {
+export default class PurgeCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
