@@ -71,6 +71,7 @@ export default class WarnCommand extends commando.Command {
 
         const embed = new MessageEmbed()
             .setTitle(`${member.user.tag} has been Banned!`)
+            .setAuthor(member.user.tag, member.user.displayAvatarURL({ dynamic: true, size: 4096 }))
             .setDescription(`Reason: **${banreason}**\nModerator:${msg.author.tag} - ${msg.author.toString()}`)
             .setColor(CONFIG.colours.red)
             .setFooter(`Member ID: ${member.id}`)

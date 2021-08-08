@@ -6,7 +6,7 @@ export default class BotinfoCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
-            aliases: ["bot"],
+            aliases: ["bot", "info"],
 
             description: "Info about the bot",
 
