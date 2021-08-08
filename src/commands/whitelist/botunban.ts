@@ -1,6 +1,7 @@
 import * as commando from "discord.js-commando";
 import * as db from "quick.db";
 import { Message } from "discord.js";
+import { STORAGE } from "../../utils/globals";
 import { getUser } from "../../utils/getUser";
 export default class BotBanCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -28,7 +29,7 @@ export default class BotBanCommand extends commando.Command {
 
             name: "botunban",
 
-            ownerOnly: true,
+            ownerOnly: false,
 
             throttling: {
                 duration: 60,
@@ -43,13 +44,16 @@ export default class BotBanCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { botunbanuserID }: {botunbanuserID: string;}
     ): Promise<Message | Message[]> {
+        const botMod = STORAGE.botmods.find((c) => c.botmodid === msg.author.id);
+        if (botMod === undefined)
+            return msg.reply("You are not a bot moderator. You cannot use this command.");
         if (msg.guild === null) return msg.say("there was an error?");
         const user = await getUser(botunbanuserID, msg.client);
         if (user === null)
             return msg.reply("Please provide a valid ID!");
         const botbanuser = db.get(`botban_${user.id}`);
         if (botbanuser === null)
-            return msg.reply(`**${user.tag}** is on the ban list!`);
+            return msg.reply(`**${user.tag}** NOT on the ban list!`);
         if (botbanuser === true)
             db.delete(`botban_${user.id}`);
         return msg.say(`**${user.tag}** has been unbanned from using the bot!`);

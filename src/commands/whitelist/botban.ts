@@ -26,7 +26,7 @@ export default class BotBanCommand extends commando.Command {
                 }
             ],
 
-            description: "Bans a user from using the bot.",
+            description: "Bot Moderator Command only.",
 
             group: "group1",
 
@@ -36,13 +36,12 @@ export default class BotBanCommand extends commando.Command {
 
             name: "botban",
 
-            ownerOnly: true,
+            ownerOnly: false,
 
             throttling: {
                 duration: 60,
                 usages: 1
-            },
-            userPermissions: ["SEND_MESSAGES"]
+            }
 
         });
     }
@@ -51,6 +50,11 @@ export default class BotBanCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { botbanuserID, botbanreason }: { botbanreason: string; botbanuserID: string; }
     ): Promise<Message | Message[]> {
+        const botMod = STORAGE.botmods.find((c) => c.botmodid === msg.author.id);
+        if (botMod === undefined)
+            return msg.reply("You are not a bot moderator. You cannot use this command.");
+
+
         if (msg.guild === null) return msg.say("there was an error?");
         const user = await getUser(botbanuserID, msg.client);
         if (user === null)

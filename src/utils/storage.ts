@@ -13,7 +13,9 @@ export interface ModLogs {
     channelID: string;
     serverID: string;
 }
-
+export interface BotMods {
+    botmodid: string;
+}
 export interface WarnLogs {
     channelID: string;
     serverID: string;
@@ -35,6 +37,8 @@ export default class Storage {
 
     public botlogserver: string;
 
+    public botmods: BotMods[];
+
     public botupdates: string;
 
     public developers: string[];
@@ -51,12 +55,14 @@ export default class Storage {
 
     public warnlogs: WarnLogs[];
 
+
     private constructor() {
         this.botbanserver = "";
         this.botbanchannel = "";
         this.botupdates = "";
         this.botlogserver = "";
         this.botlogchannel = "";
+        this.botmods = [{ botmodid: "" }];
         this.developers = [""];
         this.guildjoins = "";
         this.modlogs = [{ channelID: "", serverID: "" }];
