@@ -5,6 +5,8 @@ export default class PurgeCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
+            aliases: ["clear", "nuke", "bulkdelete"],
+
             args: [
                 {
                     key: "purgeamount",
