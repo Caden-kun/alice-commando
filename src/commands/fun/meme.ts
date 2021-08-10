@@ -18,7 +18,7 @@ export default class RedditCommand extends commando.Command {
 
             throttling: {
                 duration: 60,
-                usages: 1
+                usages: 5
             },
             userPermissions: ["SEND_MESSAGES"]
 

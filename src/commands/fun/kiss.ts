@@ -41,7 +41,7 @@ export default class CuddleCommand extends commando.Command {
 
             throttling: {
                 duration: 5,
-                usages: 1
+                usages: 2
             }
 
         });
