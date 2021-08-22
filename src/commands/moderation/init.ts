@@ -47,8 +47,8 @@ export default class ModlogsetCommand extends commando.Command {
             ownerOnly: false,
 
             throttling: {
-                duration: 60,
-                usages: 1
+                duration: 25,
+                usages: 3
             },
             userPermissions: ["MANAGE_GUILD"]
 
