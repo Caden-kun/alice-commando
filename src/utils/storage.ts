@@ -53,6 +53,10 @@ export default class Storage {
 
     public qotdserver: string;
 
+    public suggestionchannel: string;
+
+    public suggestionserver: string;
+
     public warnlogs: WarnLogs[];
 
 
@@ -69,6 +73,8 @@ export default class Storage {
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";
+        this.suggestionchannel = "";
+        this.suggestionserver = "";
         this.warnlogs = [{ channelID: "", serverID: "" }];
 
 
