@@ -51,9 +51,10 @@ export default class SuggestCommand extends commando.Command {
             + `\n${suggestlocation}\n**Suggestion:** ${suggestion}`)
             .setFooter(`User ID: ${msg.author.id}`)
             .setTimestamp();
-        const botlogserver: Guild = await msg.client.guilds.fetch(STORAGE.suggestionserver);
+        const suglogserver: Guild = await msg.client.guilds.fetch(STORAGE.suggestionserver);
 
-        const botready: TextChannel = botlogserver.channels.cache.get(STORAGE.suggestionchannel) as TextChannel;
-        return botready.send(embed);
+        const botsuggest: TextChannel = suglogserver.channels.cache.get(STORAGE.suggestionchannel) as TextChannel;
+        void await botsuggest.send(embed);
+        return msg.reply("Thank you for your suggestion. It has been sent to the bot support server.");
     }
 }
