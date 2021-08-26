@@ -22,6 +22,8 @@ export default class Config {
 
     public readonly dev: string;
 
+    public giphyAPI: string;
+
     public readonly kickfailerror: string;
 
     public readonly kickfailstaff: string;
@@ -38,12 +40,17 @@ export default class Config {
 
     public readonly prefix: string;
 
+
     public readonly token: string;
+
+
     public topGGKey: string;
+
 
     private constructor() {
         this.colours = { blue: "", green: "", red: "", yellow: "" };
         this.dev = "";
+        this.giphyAPI = "";
         this.kicknoperms = "";
         this.kickfailerror = "";
         this.kickfailstaff = "";

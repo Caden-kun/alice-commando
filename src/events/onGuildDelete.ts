@@ -22,4 +22,14 @@ export function onGuildDelete(client: Client, guild: Guild): void {
         .setFooter("Owner Information- New Guild");
     const botLogs = guild.client.channels.cache.get(channelid) as TextChannel;
     void botLogs.send(leaveguild);
+    if (client.guilds.cache.size === 35)
+        void botLogs.send("Awe, back to 35, we'll get them next time!");
+    if (client.guilds.cache.size === 40)
+        void botLogs.send("Awe, back to 40, we'll get them next time!");
+    if (client.guilds.cache.size === 50)
+        void botLogs.send("Awe, back to 50, we'll get them next time!");
+    if (client.guilds.cache.size === 60)
+        void botLogs.send("Awe, back to 60, we'll get them next time!");
+    if (client.guilds.cache.size === 75)
+        void botLogs.send("Awe, back to 75, we'll get them next time!");
 }
