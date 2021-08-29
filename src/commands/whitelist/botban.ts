@@ -59,13 +59,17 @@ export default class BotBanCommand extends commando.Command {
         const user = await getUser(botbanuserID, msg.client);
         if (user === null)
             return msg.reply("Please provide a valid ID!");
+
+        if (user.id === CONFIG.owner)
+            return msg.reply("Cunt you are not allowed to ban the owner.");
+        const botstaff = STORAGE.botmods.find((c) => c.botmodid === user.id);
+        if (botstaff !== undefined)
+            return msg.reply("You cannot ban other members of the Bot Staff. Not cool dude.");
         const botbanuser = db.get(`botban_${user.id}`);
         if (botbanuser === true)
             return msg.reply(`**${user.tag}** is already banned from the bot!`);
         if (botbanuser === null)
             db.set(`botban_${user.id}`, true);
-        if (user.id === CONFIG.owner)
-            return msg.reply("Cunt you are not allowed to ban the owner.");
         const banembed = new MessageEmbed()
             .setTitle(`${user.tag} has been bot banned!`)
             .setAuthor(`${user.tag}`, `${user.displayAvatarURL({ dynamic: true, size: 2048 })}`)
