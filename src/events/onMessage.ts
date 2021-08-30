@@ -1,5 +1,5 @@
-import * as db from "quick.db";
-import { Message } from "discord.js";
+import { CONFIG, STORAGE } from "../utils/globals";
+import { Message, MessageEmbed } from "discord.js";
 export async function onMessage(msg: Message): Promise<Message | Message[] | undefined> {
     if (msg.channel.id !== "800723694858141698") return;
 
@@ -7,10 +7,10 @@ export async function onMessage(msg: Message): Promise<Message | Message[] | und
         reason: "Not a number from 1 - 5",
         timeout: 500
     });
-    const botbanuser = db.get(`botban_${msg.author.id}`);
+    const botbanuser = STORAGE.banneduser.find((c) => c.userid === msg.author.id);
     switch (msg.content) {
         case "1": {
-            if (botbanuser === true)
+            if (botbanuser !== undefined)
                 return msg.author.send("I'm sorry, but you are banned from alice.");
             let author = msg.author.id;
             if (author.includes("#")) {
@@ -41,7 +41,7 @@ export async function onMessage(msg: Message): Promise<Message | Message[] | und
 
         case "2": {
             let author = msg.author.id;
-            if (botbanuser === true)
+            if (botbanuser !== undefined)
                 return msg.author.send("I'm sorry, but you are banned from alice.");
             if (author.includes("#")) {
                 const replace = new RegExp("#", "g");
@@ -71,7 +71,7 @@ export async function onMessage(msg: Message): Promise<Message | Message[] | und
         }
         case "3": {
             let author = msg.author.id;
-            if (botbanuser === true)
+            if (botbanuser !== undefined)
                 return msg.author.send("I'm sorry, but you are banned from alice.");
             if (author.includes("#")) {
                 const replace = new RegExp("#", "g");
@@ -135,7 +135,7 @@ export async function onMessage(msg: Message): Promise<Message | Message[] | und
         }
         case "6": {
             let author = msg.author.id;
-            if (botbanuser !== true)
+            if (botbanuser === undefined)
                 return msg.author.send("Hi there.\nThis is a notification to let you know that you are not banned "
                 + "from the bot. No ban appeal is needed.\nThank you. - The Dev Team.");
             if (author.includes("#")) {
@@ -159,9 +159,13 @@ export async function onMessage(msg: Message): Promise<Message | Message[] | und
                 topic: `${msg.author.tag} - Created at ${msg.createdAt}`
             });
             console.log(channel.name);
-            return channel.send(`${msg.author} has opened a Ban Appeal Ticket! \n`
+            void channel.send(`${msg.author} has opened a Ban Appeal Ticket! \n`
 			+ "Welcome, please wait for the support team to get back to you.\n\n**Disclaimer:"
 			+ " Ban Appeals are NOT guaranteed to be accepted.**");
+            const botbanembed = new MessageEmbed()
+                .setDescription(`You were banned for the following reason:\n**${botbanuser.banreason}**.\nPlease Justify why you would like to get unbanned.`)
+                .setColor(CONFIG.colours.yellow);
+            return channel.send(botbanembed);
         }
     }
 }

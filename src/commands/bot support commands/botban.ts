@@ -2,6 +2,8 @@ import * as commando from "discord.js-commando";
 import * as db from "quick.db";
 import { CONFIG, STORAGE } from "../../utils/globals";
 import { Guild, Message, MessageEmbed, TextChannel } from "discord.js";
+import Storage from "../../utils/storage";
+import { getMember } from "../../utils/getMember";
 import { getUser } from "../../utils/getUser";
 export default class BotBanCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -65,11 +67,17 @@ export default class BotBanCommand extends commando.Command {
         const botstaff = STORAGE.botmods.find((c) => c.botmodid === user.id);
         if (botstaff !== undefined)
             return msg.reply("You cannot ban other members of the Bot Staff. Not cool dude.");
-        const botbanuser = db.get(`botban_${user.id}`);
-        if (botbanuser === true)
-            return msg.reply(`**${user.tag}** is already banned from the bot!`);
-        if (botbanuser === null)
-            db.set(`botban_${user.id}`, true);
+
+        const buser = STORAGE.banneduser.find((c) => c.userid === user.id);
+        if (buser !== undefined)
+            return msg.reply("This user is already banned!");
+        const botbanreference = db.add("botbancase", 1);
+        const botmoderator = await getMember(msg.author.id, msg.guild);
+        if (botmoderator === null) return msg.reply("there was an error?");
+        const rank = botmoderator.roles.highest.name;
+
+        STORAGE.banneduser.push({ banreason: botbanreason, botmod: `${msg.author.tag} || \`${rank}\``, referencenumber: botbanreference, userid: user.id, usertag: user.tag });
+        Storage.saveConfig();
         const banembed = new MessageEmbed()
             .setTitle(`${user.tag} has been bot banned!`)
             .setAuthor(`${user.tag}`, `${user.displayAvatarURL({ dynamic: true, size: 2048 })}`)
@@ -80,7 +88,7 @@ export default class BotBanCommand extends commando.Command {
         const bandm = new MessageEmbed()
             .setTitle("You are banned from using Alice.")
             .setColor(CONFIG.colours.red)
-            .setDescription(`Reason: ${botbanreason}`)
+            .setDescription(`Reason: ${botbanreason}\nReference Number: \`${botbanreference}\``)
             .setFooter("Please go to #support and select number 6 to appeal the ban.")
             .setTimestamp();
         const banlogserver: Guild = await msg.client.guilds.fetch(STORAGE.botbanserver);
@@ -90,6 +98,9 @@ export default class BotBanCommand extends commando.Command {
         void user.send(bandm);
         void banlogchannel.send(banembed);
 
-        return msg.say(`**${user.tag}** has been banned from using the bot!`);
+        const botbanembed = new MessageEmbed()
+            .setDescription(`${user.tag} has been banned.\nReference Number: \`${botbanreference}\``)
+            .setColor(CONFIG.colours.yellow);
+        return msg.channel.send(botbanembed);
     }
 }

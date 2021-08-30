@@ -20,7 +20,14 @@ export interface WarnLogs {
     channelID: string;
     serverID: string;
 }
+export interface BannedUser {
+    banreason: string;
+    botmod: string;
+    referencenumber: number;
+    userid: string;
+    usertag: string;
 
+}
 /**
  * This represents the storage.yml
  * @class Storage
@@ -28,6 +35,8 @@ export interface WarnLogs {
  */
 export default class Storage {
     private static readonly _configLocation = "./storage.yml";
+
+    public banneduser: BannedUser[];
 
     public botbanchannel: string;
 
@@ -61,6 +70,7 @@ export default class Storage {
 
 
     private constructor() {
+        this.banneduser = [{ banreason: "", botmod: "", referencenumber: 0, userid: "", usertag: "" }];
         this.botbanserver = "";
         this.botbanchannel = "";
         this.botupdates = "";

@@ -1,7 +1,7 @@
 import * as commando from "discord.js-commando";
-import * as db from "quick.db";
 import { Message } from "discord.js";
 import { STORAGE } from "../../utils/globals";
+import Storage from "../../utils/storage";
 import { getUser } from "../../utils/getUser";
 export default class BotBanCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -51,11 +51,13 @@ export default class BotBanCommand extends commando.Command {
         const user = await getUser(botunbanuserID, msg.client);
         if (user === null)
             return msg.reply("Please provide a valid ID!");
-        const botbanuser = db.get(`botban_${user.id}`);
-        if (botbanuser === null)
-            return msg.reply(`**${user.tag}** NOT on the ban list!`);
-        if (botbanuser === true)
-            db.delete(`botban_${user.id}`);
+        const buser = STORAGE.banneduser.findIndex((a) => a.userid === user.id);
+        if (buser === -1) {
+            return msg.reply("This user is not banned from the bot!");
+        }
+
+        STORAGE.banneduser.splice(buser, 1);
+        Storage.saveConfig();
         return msg.say(`**${user.tag}** has been unbanned from using the bot!`);
     }
 }

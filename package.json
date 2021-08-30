@@ -10,6 +10,7 @@
     "fs": "0.0.1-security",
     "js-yaml": "^3.14.1",
     "moment": "^2.29.1",
+    "nanoid": "^3.1.25",
     "path": "^0.12.7",
     "querystring": "^0.2.1",
     "quick.db": "^7.1.3",
