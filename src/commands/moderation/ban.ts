@@ -92,6 +92,12 @@ export default class WarnCommand extends commando.Command {
             return channel.send(embed);
 
         });
+        try {
+            await member.send(dmembed);
+
+        } catch (err) {
+            void msg.reply("I could not DM the user to inform them that they were banned.");
+        }
         await member.send(dmembed);
         member.ban({ days: 0, reason: `${banreason}` })
             .catch(async (error) => msg.reply(`Ban failed.\n Reason: **${error}**`));
