@@ -98,7 +98,6 @@ export default class WarnCommand extends commando.Command {
         } catch (err) {
             void msg.reply("I could not DM the user to inform them that they were banned.");
         }
-        await member.send(dmembed);
         member.ban({ days: 0, reason: `${banreason}` })
             .catch(async (error) => msg.reply(`Ban failed.\n Reason: **${error}**`));
         let description = `**${member.user.tag}** was banned for **${banreason}**`;
