@@ -63,7 +63,7 @@ export default class BotBanCommand extends commando.Command {
             return msg.reply("Please provide a valid ID!");
 
         if (user.id === CONFIG.owner)
-            return msg.reply("Cunt you are not allowed to ban the owner.");
+            return msg.reply("http://cadenkun.com/caughtin4k.gif");
         const botstaff = STORAGE.botmods.find((c) => c.botmodid === user.id);
         if (botstaff !== undefined)
             return msg.reply("You cannot ban other members of the Bot Staff. Not cool dude.");
