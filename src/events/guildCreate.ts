@@ -1,8 +1,8 @@
 import { CONFIG, STORAGE, discordLogo } from "../utils/globals";
 import { Client, Guild, MessageEmbed, TextChannel } from "discord.js";
+import { getUser } from "../utils/getUser";
 
-
-export function onGuildCreate(client: Client, guild: Guild): void {
+export async function onGuildCreate(client: Client, guild: Guild): Promise<void> {
     // This event triggers when the bot joins a guild.
     const channelid = STORAGE.guildjoins;
     let guildicon = null;
@@ -11,12 +11,13 @@ export function onGuildCreate(client: Client, guild: Guild): void {
     if (guildicon === null) {
         guildicon = discordLogo;
     }
-
+    const serverowner = await getUser(guild.ownerID, client);
     const newguild = new MessageEmbed()
         .setColor(CONFIG.colours.green)
         .setTitle("I have been added to a new server!")
         .setThumbnail(guildicon)
         .addField("Server Name:", `> **${guild.name}**`, false)
+        .addField("Server Owner:", `> **${serverowner?.tag}**`, false)
         .addField("Server ID:", `> **${guild.id}**`, false)
         .addField("Total Members:", `> **${guild.memberCount}** Members`)
         .addField("Total Bot Users:", `> **${client.users.cache.size}** users`)
