@@ -44,7 +44,7 @@ export default class ModlogsetCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { modlogs }: { modlogs: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const channel = getChannel(modlogs, msg.guild);
 

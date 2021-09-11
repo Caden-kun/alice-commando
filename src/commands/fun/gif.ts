@@ -57,6 +57,7 @@ export default class GifCommand extends commando.Command {
             .setAuthor(msg.author.tag, msg.author.displayAvatarURL({ dynamic: true }))
             .setColor(CONFIG.colours.yellow)
             .setImage(json.results[random].media[0].gif.url)
+            .setFooter("Hopefully this is the GIF you wre looking for <3.")
             .setTimestamp();
         const m = await msg.channel.send(loading);
         return m.edit(embed);

@@ -31,7 +31,7 @@ export default class UptimeCommand extends commando.Command {
     public async run(
         msg: commando.CommandoMessage
     ): Promise<Message | Message[]> {
-        if (msg.client.uptime === null) return msg.reply("Uptime Error!");
+        if (msg.client.uptime === null) return msg.reply("internal error!\nError 102 - uptime_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
         let seconds = Math.floor(msg.client.uptime / 1000);
         let minutes = Math.floor(seconds / 60);
         let hours = Math.floor(minutes / 60);

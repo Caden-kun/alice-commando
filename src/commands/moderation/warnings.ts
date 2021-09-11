@@ -46,12 +46,12 @@ export default class WarnCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { warningsuser }: { warningsuser: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
         void msg.delete();
         const member = await getMember(warningsuser, msg.guild);
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
         if (member === null) {
-            return msg.reply("mention a user!");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
         }
         let warncount = db.get(`${member.id}_${msg.guild.id}_warns`);
         let warncolor = CONFIG.colours.red;

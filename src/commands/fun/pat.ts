@@ -52,12 +52,12 @@ export default class PatCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { patuser, addtext }: { addtext: string; patuser: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
+        if (msg.guild === null) return msg.reply("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const member = await getMember(patuser, msg.guild);
 
         if (member === null)
-            return msg.reply("mention a user!");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const pats = [
             "https://cdn.discordapp.com/attachments/857397018322403378/868619608377143356/pat1.gif",

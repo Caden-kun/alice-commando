@@ -55,7 +55,7 @@ export default class HugCommand extends commando.Command {
         const member = await getMember(huguser, msg.guild);
 
         if (member === null)
-            return msg.reply("mention a user!");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const hugs = [
             "https://cdn.discordapp.com/attachments/857396944740286507/857431310117371914/hug1.gif",

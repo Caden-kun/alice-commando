@@ -44,7 +44,7 @@ export default class ModlogremoveCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { delmodlogs }: { delmodlogs: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const channel = getChannel(delmodlogs, msg.guild);
         if (channel === undefined) return msg.say("Please give me a **valid** channel");

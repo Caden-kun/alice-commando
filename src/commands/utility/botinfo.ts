@@ -40,7 +40,7 @@ export default class BotinfoCommand extends commando.Command {
         const owner = await msg.client.users.fetch(ownerid);
         const devid = CONFIG.dev;
         const dev = await msg.client.users.fetch(devid);
-        if (msg.client.uptime === null) return msg.reply("Uptime Error!");
+        if (msg.client.uptime === null) return msg.reply("there was an internal error!\nError 102 - uptime_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
         let seconds = Math.floor(msg.client.uptime / 1000);
         let minutes = Math.floor(seconds / 60);
         let hours = Math.floor(minutes / 60);

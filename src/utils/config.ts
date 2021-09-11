@@ -33,6 +33,8 @@ export default class Config {
 
     public readonly kickself: string;
 
+    public readonly osukey: string;
+
     public readonly owner: string;
 
     public readonly owners: string | string[] | undefined;
@@ -57,6 +59,7 @@ export default class Config {
         this.kickhelp = "";
         this.kickself = "";
         this.owner = "";
+        this.osukey = "";
         this.prefix = "";
         this.topGGKey = "";
         this.token = "";

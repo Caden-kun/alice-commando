@@ -46,7 +46,7 @@ export default class BotlogCommand extends commando.Command {
     ): Promise<Message | Message[]> {
 
         STORAGE.botbanchannel = banlogs;
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
         STORAGE.botbanserver = msg.guild.id;
         // eslint-disable-next-line prefer-destructuring
         Storage.saveConfig();

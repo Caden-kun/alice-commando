@@ -51,12 +51,12 @@ export default class SlapCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { slapuser, addtext }: { addtext: string; slapuser: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
+        if (msg.guild === null) return msg.reply("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const member = await getMember(slapuser, msg.guild);
 
         if (member === null)
-            return msg.reply("mention a user!");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const slap = [
             "https://cdn.discordapp.com/attachments/857396906921295932/863532362536189952/slap1.gif",

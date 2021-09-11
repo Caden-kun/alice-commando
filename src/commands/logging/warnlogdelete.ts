@@ -44,7 +44,7 @@ export default class WarnlogremoveCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { delwarnlog }: { delwarnlog: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const channel = getChannel(delwarnlog, msg.guild);
         if (channel === undefined) return msg.say("Please give me a **valid** channel");

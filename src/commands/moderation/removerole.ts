@@ -53,7 +53,7 @@ export default class AddRoleCommand extends commando.Command {
     ): Promise<Message | Message[]> {
         let rIDParsed = roleid;
         if (msg.guild === null)
-            return msg.reply("there was an error?");
+            return msg.reply("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
         const member = await getMember(roleuser, msg.guild);
 
         if (roleid.startsWith("<@&") && roleid.endsWith(">")) {
@@ -65,7 +65,7 @@ export default class AddRoleCommand extends commando.Command {
         if (member === undefined)
             return msg.reply("Please provide a valid user.");
         if (member === null)
-            return msg.reply("There was an error?");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
         let radd;
         try {
             if (!member.roles.cache.find((r) => r.id === rIDParsed)) {

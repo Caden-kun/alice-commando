@@ -1,7 +1,9 @@
 import * as commando from "discord.js-commando";
 import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
+import { CONFIG } from "../../utils/globals";
 import { getMember } from "../../utils/getMember";
+import { getUser } from "../../utils/getUser";
 import moment from "moment";
 const status = {
     dnd: "<:AH_StatusDnd:723216144680484955> Do Not Disturb",
@@ -19,7 +21,7 @@ export default class WhoisCommand extends commando.Command {
 
             args: [
                 {
-                    default: "",
+                    default: "lookup",
 
                     key: "whouser",
 
@@ -57,10 +59,50 @@ export default class WhoisCommand extends commando.Command {
         if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
 
         let member = await getMember(whouser, msg.guild);
+        if (whouser === "lookup")
+            // eslint-disable-next-line prefer-destructuring
+            member = msg.member;
         // eslint-disable-next-line prefer-destructuring
-        if (member === null) member = msg.member;
+        if (member === null) {
+            const user = await getUser(whouser, msg.client);
+            if (user === null) return msg.reply("there was an internal error!\nError 100 - user_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
+            let presenceString;
+            switch (user.presence.status) {
+                case "online":
+                    presenceString = status.online;
+                    break;
 
-        if (member === null) return msg.reply("There was a problem! Please contact the devs!");
+                case "offline":
+                    presenceString = status.offline;
+                    break;
+
+                case "idle":
+                    presenceString = status.idle;
+                    break;
+
+                case "dnd":
+                    presenceString = status.dnd;
+                    break;
+
+                case "invisible":
+                    presenceString = status.invisible;
+                    break;
+
+
+            }
+            const joinDiscord = moment(user.createdAt).format("llll");
+            const embed = new MessageEmbed()
+                .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))
+                .setTitle("This user is not in the server!")
+                .setDescription(`${user.tag}`)
+                .setColor(CONFIG.colours.yellow)
+                .setThumbnail(`${user.displayAvatarURL({ dynamic: true })}`)
+                .addField("Account Created:", `${joinDiscord}`, false)
+                .addField("Status:", presenceString, true)
+                .setFooter(`ID: ${user.id}`)
+                .setTimestamp();
+            return msg.channel.send(embed);
+        }
 
         let presenceString;
         switch (member.presence.status) {

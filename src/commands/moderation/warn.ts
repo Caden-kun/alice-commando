@@ -51,7 +51,7 @@ export default class WarnCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { warnuser, warnreason }: { warnreason: string; warnuser: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
         void msg.delete();
         const member = await getMember(warnuser, msg.guild);
 
@@ -61,7 +61,7 @@ export default class WarnCommand extends commando.Command {
             return msg.reply("Please mention a valid user to warn!");
         }
         if (member === null) {
-            return msg.reply("Mention a user!");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
         }
         if (member.id === msg.author.id) {
             return msg.reply("You can't warn yourself!");

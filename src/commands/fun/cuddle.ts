@@ -50,12 +50,12 @@ export default class CuddleCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { cuddleuser, addtext }: { addtext: string; cuddleuser: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.reply("This command can only be used in guilds!");
+        if (msg.guild === null) return msg.reply("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const member = await getMember(cuddleuser, msg.guild);
 
         if (member === null)
-            return msg.reply("mention a user!");
+            return msg.reply("there was an internal error!\nError 103 - member_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
 
         const cuddle = [
             "https://cdn.discordapp.com/attachments/857397061544181810/857397110483714088/cuddle1.gif",

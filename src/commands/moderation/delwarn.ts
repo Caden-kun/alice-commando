@@ -44,7 +44,7 @@ export default class DelWarnCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { warnuser }: { warnuser: string; }
     ): Promise<Message | Message[]> {
-        if (msg.guild === null) return msg.say("There was an error?");
+        if (msg.guild === null) return msg.say("there was an internal error!\nError 101 - message_guild_null\nPlease contact the devs with the error code if you think that there is a problem.");
         void msg.delete();
         const member = await getMember(warnuser, msg.guild);
 
