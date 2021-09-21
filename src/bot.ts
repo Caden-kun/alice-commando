@@ -15,7 +15,7 @@ import { onMessage } from "./events/onMessage";
 import { onReady } from "./events/ready";
 import { open } from "sqlite";
 import path from "path";
-
+require("discord-reply");
 export const col: Collections = {
     aliases: new Collection(),
     commands: new Collection(),

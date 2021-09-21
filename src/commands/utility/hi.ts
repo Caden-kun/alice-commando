@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
 import { Message } from "discord.js";
+
 export default class HiCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
