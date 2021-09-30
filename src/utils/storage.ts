@@ -20,6 +20,14 @@ export interface WarnLogs {
     channelID: string;
     serverID: string;
 }
+
+export interface Notes {
+    modID: string;
+    note: string;
+    serverID: string;
+    timeStamp: string;
+    userID: string;
+}
 export interface BannedUser {
     banreason: string;
     botmod: string;
@@ -56,6 +64,8 @@ export default class Storage {
 
     public modlogs: ModLogs[];
 
+    public notes: Notes[];
+
     public qotdchannel: string;
 
     public qotdping: string;
@@ -80,6 +90,7 @@ export default class Storage {
         this.developers = [""];
         this.guildjoins = "";
         this.modlogs = [{ channelID: "", serverID: "" }];
+        this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";
