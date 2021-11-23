@@ -68,7 +68,6 @@ export default class AddNoteCommand extends commando.Command {
         const date = d.toDateString();
         STORAGE.notes.push({ modID: msg.author.id, note: `${note}`, serverID: msg.guild.id, timeStamp: date, userID: user.id });
         Storage.saveConfig();
-
         const noteembed = new MessageEmbed()
             .setDescription(`Note added to ${user.tag}. \nNote: \`${note}\``)
             .setColor(CONFIG.colours.yellow)

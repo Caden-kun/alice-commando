@@ -62,6 +62,8 @@ export default class Storage {
 
     public guildjoins: string;
 
+    public membercount: string;
+
     public modlogs: ModLogs[];
 
     public notes: Notes[];
@@ -89,6 +91,7 @@ export default class Storage {
         this.botmods = [{ botmodid: "" }];
         this.developers = [""];
         this.guildjoins = "";
+        this.membercount = "";
         this.modlogs = [{ channelID: "", serverID: "" }];
         this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
         this.qotdchannel = "";

@@ -79,7 +79,7 @@ export default class StatsCommand extends commando.Command {
             case "fun":
                 // eslint-disable-next-line no-case-declarations
                 let statcmd = "null";
-                statcmd = `Cuddle Command Usage: ${cuddlestats}\nHug Command Usage: ${hugstats}\n
+                statcmd = `Cuddle Command Usage: ${cuddlestats}\nHug Command Usage: ${hugstats}
                 Headpat Command Usage: ${patstats}\nReddit Command Usage: ${redditstats}\nSlap Command Usage: ${slapstats}\n
                 Smile Command Usage: ${smilestats}\n`;
                 // eslint-disable-next-line no-case-declarations

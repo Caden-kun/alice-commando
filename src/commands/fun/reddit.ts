@@ -1,19 +1,29 @@
 import * as commando from "discord.js-commando";
 import { Message, MessageEmbed } from "discord.js";
 import { randomBunny } from "random-bunny";
-export default class RedditCommand extends commando.Command {
+export default class SubRedditCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
+            args: [
+                {
+                    default: "dankmemes",
 
+                    key: "sreddit",
+
+                    prompt: "Provide a Subreddit!",
+
+                    type: "string"
+                }
+            ],
             description: "Commando subreddit command.",
 
             group: "fun",
 
             guildOnly: true,
 
-            memberName: "meme",
+            memberName: "reddit",
 
-            name: "meme",
+            name: "reddit",
 
 
             throttling: {
@@ -26,20 +36,11 @@ export default class RedditCommand extends commando.Command {
     }
 
     public async run(
-        msg: commando.CommandoMessage
+        msg: commando.CommandoMessage,
+        { sreddit }: { sreddit: string; }
     ): Promise<Message | Message[]> {
-        const reddit = [
-            "dankmemes",
-            "animemes",
-            "memes",
-            "Animemes",
-            "MemeEconomy",
-            "ComedyCemetery",
-            "terriblefacebookmemes",
-            "funny"
-        ];
-        const subreddit = reddit[Math.floor(Math.random() * reddit.length)];
-        return randomBunny(`${subreddit}`, "top", async (res: { title: string; url: string; }) => {
+
+        return randomBunny(`${sreddit}`, "top", async (res: { title: string; url: string; }) => {
             const loading = new MessageEmbed()
                 .setTitle("Please wait...")
                 .setDescription("<a:AH_LoAding:776776118401368064> Loading image...")
@@ -49,8 +50,8 @@ export default class RedditCommand extends commando.Command {
                 .setColor("#EFFF00")
                 .setImage(res.url)
                 .setTitle(res.title)
-                .setDescription(`From [r/${subreddit}](https://reddit.com/r/${subreddit})`)
-                .setFooter("Enjoy your meme <3")
+                .setDescription(`From [r/${sreddit}](https://reddit.com/r/${sreddit})`)
+                .setFooter("Enjoy! <3")
                 .setTimestamp();
             const m = await msg.channel.send(loading);
             return m.edit(loaded);

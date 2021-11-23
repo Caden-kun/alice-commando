@@ -42,7 +42,9 @@ export default class ImageCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { image }: { image: string;}
     ): Promise<Message | Message[]> {
+        void msg.delete();
         const embed = new MessageEmbed()
+            .setTitle(`${msg.author.username}'s Image:`)
             .setImage(image)
             .setColor(CONFIG.colours.yellow);
         return msg.channel.send(embed);
