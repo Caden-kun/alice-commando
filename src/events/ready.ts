@@ -13,9 +13,7 @@ export async function onReady(client: CommandoClient): Promise<void> {
         "I am alive?",
         "alice invite",
         "alice upvote!",
-        "over Kirito || alice help for help!",
-        "Spooky, scary skeletons, Send shivers down your spine~",
-        "Happy Spooktober! || Alice help for help!"
+        "over Kirito || alice help for help!"
 
 
     ]; // Creates an arraylist containing phrases you want your bot to switch through.
