@@ -12,6 +12,15 @@ export default class ImageCommand extends commando.Command {
                     prompt: "please give a link of the image you want to display!",
 
                     type: "string"
+                },
+                {
+                    default: "",
+
+                    key: "addontext",
+
+                    prompt: "please give a link of the image you want to display!",
+
+                    type: "string"
                 }
             ],
 
@@ -40,13 +49,15 @@ export default class ImageCommand extends commando.Command {
 
     public async run(
         msg: commando.CommandoMessage,
-        { image }: { image: string;}
+        { image, addontext }: { addontext: string; image: string; }
     ): Promise<Message | Message[]> {
         void msg.delete();
         const embed = new MessageEmbed()
             .setTitle(`${msg.author.username}'s Image:`)
+            .setDescription(addontext)
             .setImage(image)
-            .setColor(CONFIG.colours.yellow);
+            .setColor(CONFIG.colours.yellow)
+            .setTimestamp();
         return msg.channel.send(embed);
     }
 }
