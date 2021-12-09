@@ -12,6 +12,8 @@ export default class StatsCommand extends commando.Command {
 
             args: [
                 {
+                    default: "fun",
+
                     key: "cmdgroup",
 
                     prompt: "Which command group are you getting command stats from?",
@@ -47,11 +49,15 @@ export default class StatsCommand extends commando.Command {
     ): Promise<Message | Message[]> {
         // Fun commands
         const cuddlestats = db.get("cuddle");
+        const gifstats = db.get("gif");
         const hugstats = db.get("hug");
+        const kissstats = db.get("kiss");
+        const memestats = db.get("meme");
         const patstats = db.get("pat");
         const redditstats = db.get("reddit");
         const slapstats = db.get("slap");
         const smilestats = db.get("smile");
+        const topicstats = db.get("topic");
         // Moderation
         const addrolelogs = db.get("addrole");
         const removerolelogs = db.get("removerole");
@@ -68,10 +74,10 @@ export default class StatsCommand extends commando.Command {
         const botinfostats = db.get("botinfo");
         const embedstats = db.get("embed");
         const histats = db.get("hi");
+        const imgstats = db.get("image");
         const invstats = db.get("invite");
         const joinstats = db.get("joindates");
         const serverinfstats = db.get("serverinfo");
-        const topicstats = db.get("topic");
         const uptimestats = db.get("uptime");
         const whoisstats = db.get("whois");
 
