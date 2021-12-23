@@ -42,7 +42,7 @@ export interface BannedUser {
  * @property {string[]} channels
  */
 export default class Storage {
-    private static readonly _configLocation = "./storage.yml";
+    private static readonly _configLocation = "./../storage.yml";
 
     public banneduser: BannedUser[];
 
