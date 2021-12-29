@@ -62,7 +62,7 @@ export default class EmbedCommand extends commando.Command {
         msg: commando.CommandoMessage,
         { title, description, color, image }: { color: string; description: string; image: string; title: string;}
     ): Promise<Message | Message[]> {
-        if (image === "null") image = "https://yourmomgay.com";
+        if (image === "null") image = "https://media.cadenkun.com/nullimage.lol";
         const embed = new MessageEmbed()
             .setTitle(title)
             .setDescription(description)
