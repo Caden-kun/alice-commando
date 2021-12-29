@@ -16,6 +16,9 @@ export interface ModLogs {
 export interface BotMods {
     botmodid: string;
 }
+export interface Osu {
+    osuid: string;
+}
 export interface WarnLogs {
     channelID: string;
     serverID: string;
@@ -42,7 +45,7 @@ export interface BannedUser {
  * @property {string[]} channels
  */
 export default class Storage {
-    private static readonly _configLocation = "./../storage.yml";
+    private static readonly _configLocation = "./storage.yml";
 
     public banneduser: BannedUser[];
 
@@ -71,6 +74,8 @@ export default class Storage {
     public noeltime: string;
 
     public notes: Notes[];
+
+    public osu: Osu[];
 
     public qotdchannel: string;
 
@@ -102,6 +107,7 @@ export default class Storage {
         this.modlogs = [{ channelID: "", serverID: "" }];
         this.noeltime = "";
         this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
+        this.osu = [{ osuid: "" }];
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";

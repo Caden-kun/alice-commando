@@ -34,6 +34,9 @@ export default class RestartStatsCommand extends commando.Command {
         msg: commando.CommandoMessage
     ): Promise<Message | Message[]> {
         void msg.delete();
+        const osuser = STORAGE.osu.find((c) => c.osuid === msg.author.id);
+        if (osuser === undefined)
+            return msg.reply("You do not have permission to use this command.");
         setInterval(async () => {
             let noelscore = db.get("589290324464238592_osu");
             let cadenscore = db.get("597884706897264681_osu");

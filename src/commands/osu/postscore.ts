@@ -1,6 +1,7 @@
 import * as commando from "discord.js-commando";
 import * as db from "quick.db";
 import { Message, MessageEmbed } from "discord.js";
+import { STORAGE } from "../../utils/globals";
 export default class PostStatsCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
@@ -34,7 +35,9 @@ export default class PostStatsCommand extends commando.Command {
         let noelscore = db.get("589290324464238592_osu");
         let cadenscore = db.get("597884706897264681_osu");
         let vicscore = db.get("456231737488441344_osu");
-
+        const osuser = STORAGE.osu.find((c) => c.osuid === msg.author.id);
+        if (osuser === undefined)
+            return msg.reply("You do not have permission to use this command.");
         if (noelscore === null) {
             noelscore = "No wins reported yet.";
         }

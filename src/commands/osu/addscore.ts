@@ -45,6 +45,9 @@ export default class HiCommand extends commando.Command {
     ): Promise<Message | Message[]> {
         if (msg.guild === null)
             return msg.reply("there was an error?");
+        const osuser = STORAGE.osu.find((c) => c.osuid === msg.author.id);
+        if (osuser === undefined)
+            return msg.reply("You do not have permission to use this command.");
         const member = await getMember(scoreuser, msg.guild);
         if (member === null)
             return msg.reply("Please mention a valid user!");
