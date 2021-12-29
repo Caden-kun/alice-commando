@@ -13,7 +13,6 @@ export default class UpvoteCommand extends commando.Command {
 
             guildOnly: false,
 
-
             memberName: "upvote",
 
             name: "upvote",
@@ -38,7 +37,7 @@ export default class UpvoteCommand extends commando.Command {
             .setColor(CONFIG.colours.yellow)
             .setDescription("\n**You can upvote her on either one of these sites, or even both if you want!**\n"
             + `[top.gg](${topgglink}) \n[Discord Bot List](${dbllink})`)
-            .setFooter("Thank you for upvoting!")
+            .setFooter("Thank you for upvoting! It really helps the bot grow <3.")
             .setTimestamp();
         return msg.say(embed);
     }

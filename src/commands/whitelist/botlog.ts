@@ -24,7 +24,6 @@ export default class BotlogCommand extends commando.Command {
 
             guildOnly: true,
 
-
             memberName: "setcmdlog",
 
             name: "setcmdlog",

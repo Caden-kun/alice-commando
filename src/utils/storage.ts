@@ -58,6 +58,8 @@ export default class Storage {
 
     public botupdates: string;
 
+    public cadentime: string;
+
     public developers: string[];
 
     public guildjoins: string;
@@ -65,6 +67,8 @@ export default class Storage {
     public membercount: string;
 
     public modlogs: ModLogs[];
+
+    public noeltime: string;
 
     public notes: Notes[];
 
@@ -78,6 +82,8 @@ export default class Storage {
 
     public suggestionserver: string;
 
+    public victime: string;
+
     public warnlogs: WarnLogs[];
 
 
@@ -89,16 +95,19 @@ export default class Storage {
         this.botlogserver = "";
         this.botlogchannel = "";
         this.botmods = [{ botmodid: "" }];
+        this.cadentime = "";
         this.developers = [""];
         this.guildjoins = "";
         this.membercount = "";
         this.modlogs = [{ channelID: "", serverID: "" }];
+        this.noeltime = "";
         this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
         this.qotdchannel = "";
         this.qotdserver = "";
         this.qotdping = "";
         this.suggestionchannel = "";
         this.suggestionserver = "";
+        this.victime = "";
         this.warnlogs = [{ channelID: "", serverID: "" }];
 
 
