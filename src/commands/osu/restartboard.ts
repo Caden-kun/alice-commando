@@ -69,7 +69,7 @@ export default class RestartStatsCommand extends commando.Command {
                 .setThumbnail("https://media.cadenkun.com/osulogo.png")
                 .setDescription(`<@589290324464238592> - ${noelscore}\nLast win: <t:${timenoel}:R>\n\n<@597884706897264681> - ${cadenscore}\nLast win: <t:${timecaden}:R>\n\n<@456231737488441344> - ${vicscore}\nLast win: <t:${timevic}:R>`)
                 .setTimestamp();
-            void msg.channel.messages.fetch({ around: "925592226371870770", limit: 1 })
+            void msg.channel.messages.fetch({ around: "926300386120302592", limit: 1 })
                 .then(async (message) => {
                     const fetchedMsg = message.first();
                     if (fetchedMsg === undefined)
