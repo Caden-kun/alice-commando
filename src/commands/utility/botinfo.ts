@@ -35,7 +35,7 @@ export default class BotinfoCommand extends commando.Command {
     ): Promise<Message | Message[]> {
         const guilds = msg.client.guilds.cache.size;
         const channels = msg.client.channels.cache.size;
-        const users = msg.client.users.cache.size;
+        const users = STORAGE.membercount;
         const ownerid = CONFIG.owner;
         const owner = await msg.client.users.fetch(ownerid);
         const devid = CONFIG.dev;

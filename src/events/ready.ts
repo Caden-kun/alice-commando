@@ -1,6 +1,7 @@
 import { CONFIG, STORAGE } from "../utils/globals";
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
 import { CommandoClient } from "discord.js-commando";
+import Storage from "../utils/storage";
 
 export async function onReady(client: CommandoClient): Promise<void> {
     console.log("Ready!");
@@ -38,5 +39,13 @@ export async function onReady(client: CommandoClient): Promise<void> {
         if (client.user === null) return;
         void client.user.setActivity(item, { type: "WATCHING" }); // Sets bot's activities to one of the phrases in the arraylist.
     }, 600000); // Runs this every 10 Minutes.
+
+    let members = 0;
+    client.guilds.cache.forEach((g) => {
+        members += g.memberCount;
+    });
+    STORAGE.membercount = members;
+    Storage.saveConfig();
+    console.log(STORAGE.membercount);
 }
 

@@ -65,7 +65,7 @@ export default class WhoisCommand extends commando.Command {
         // eslint-disable-next-line prefer-destructuring
         if (member === null) {
             const user = await getUser(whouser, msg.client);
-            if (user === null) return msg.reply("there was an internal error!\nError 100 - user_not_found\nPlease contact the devs with the error code if you think that there is a problem.");
+            if (user === null) return msg.reply("User not found");
             let presenceString;
             switch (user.presence.status) {
                 case "online":

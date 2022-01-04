@@ -67,7 +67,7 @@ export default class Storage {
 
     public guildjoins: string;
 
-    public membercount: string;
+    public membercount: number;
 
     public modlogs: ModLogs[];
 
@@ -103,7 +103,7 @@ export default class Storage {
         this.cadentime = "";
         this.developers = [""];
         this.guildjoins = "";
-        this.membercount = "";
+        this.membercount = 0;
         this.modlogs = [{ channelID: "", serverID: "" }];
         this.noeltime = "";
         this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
