@@ -1,6 +1,6 @@
 import * as commando from "discord.js-commando";
+import { CONFIG, STORAGE } from "../../utils/globals";
 import { Message, MessageEmbed } from "discord.js";
-import { CONFIG } from "../../utils/globals";
 export default class MemberCountCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
@@ -37,7 +37,7 @@ export default class MemberCountCommand extends commando.Command {
             .setColor(CONFIG.colours.yellow)
             .setTitle("Member Count:")
             .setThumbnail(msg.author.displayAvatarURL({ dynamic: true, size: 1024 }))
-            .setDescription(`I am serving **${msg.client.users.cache.size}** users!`)
+            .setDescription(`I am serving **${STORAGE.membercount}** users!`)
             .setTimestamp();
         return msg.channel.send(embed);
     }

@@ -39,13 +39,14 @@ export async function onReady(client: CommandoClient): Promise<void> {
         if (client.user === null) return;
         void client.user.setActivity(item, { type: "WATCHING" }); // Sets bot's activities to one of the phrases in the arraylist.
     }, 600000); // Runs this every 10 Minutes.
+    setInterval(() => {
+        let members = 0;
+        client.guilds.cache.forEach((g) => {
+            members += g.memberCount;
+        });
+        STORAGE.membercount = members;
+        Storage.saveConfig();
 
-    let members = 0;
-    client.guilds.cache.forEach((g) => {
-        members += g.memberCount;
-    });
-    STORAGE.membercount = members;
-    Storage.saveConfig();
-    console.log(STORAGE.membercount);
+    }, 120000);
 }
 
