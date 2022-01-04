@@ -7,7 +7,7 @@ export async function onReady(client: CommandoClient): Promise<void> {
     console.log("Ready!");
     const users = client.users.cache.size;
     const activitiesList = [
-        `${users} Users!`,
+        `${STORAGE.membercount} Users!`,
         `${client.registry.commands.filter((c) => !c.ownerOnly).size} commands!`,
         `alice invite || Watching over ${client.registry.commands.filter((c) => !c.ownerOnly).size} commands!`,
         `over ${client.guilds.cache.size} Servers!`,

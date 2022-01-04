@@ -1,14 +1,15 @@
 import { CONFIG, STORAGE } from "../utils/globals";
 import { Message, MessageEmbed, PartialMessage, TextChannel } from "discord.js";
-import { wait } from "../utils/wait";
 
 export async function onDelete(msg: Message | PartialMessage): Promise<void> {
     if (msg.channel.type === "dm") return;
     if (msg.author?.bot === true) return;
     if (msg.guild === null) return;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const IgnoredUserList = STORAGE.ignoredusers.find((c) => c.ignoredusers === msg.author?.id);
+    if (IgnoredUserList !== undefined) return;
     const files = msg.attachments.array();
 
-    await wait(3000);
     //    const auditLogs = (await msg.guild.fetchAuditLogs({ "limit": 5, "type": "MESSAGE_DELETE" })).entries.first();
     //    console.log(auditLogs);
     // This is a work in progress

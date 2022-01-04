@@ -16,6 +16,9 @@ export interface ModLogs {
 export interface BotMods {
     botmodid: string;
 }
+export interface IgnoredUsers {
+    ignoredusers: string;
+}
 export interface Osu {
     osuid: string;
 }
@@ -67,6 +70,8 @@ export default class Storage {
 
     public guildjoins: string;
 
+    public ignoredusers: IgnoredUsers[];
+
     public membercount: number;
 
     public modlogs: ModLogs[];
@@ -103,6 +108,7 @@ export default class Storage {
         this.cadentime = "";
         this.developers = [""];
         this.guildjoins = "";
+        this.ignoredusers = [{ ignoredusers: "" }];
         this.membercount = 0;
         this.modlogs = [{ channelID: "", serverID: "" }];
         this.noeltime = "";
