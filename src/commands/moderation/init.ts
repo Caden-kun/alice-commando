@@ -71,11 +71,11 @@ export default class ModlogsetCommand extends commando.Command {
         const modGuild = STORAGE.modlogs.find((c) => c.serverID === msg.guild?.id);
         if (modGuild !== undefined)
             return msg.reply(`You already have **modlog** channel set in the server! Please remove the following channel from modlogs: <#${modGuild.channelID}>\n`
-            + `PS: You can delete the modlog channel by using \`alice removelogs ${modGuild.channelID}\``);
+            + `PS: You can delete the modlog channel by using \`${CONFIG.prefix} removelogs ${modGuild.channelID}\``);
         const warnGuild = STORAGE.warnlogs.find((c) => c.serverID === msg.guild?.id);
         if (warnGuild !== undefined)
             return msg.reply(`You already have **Warnings** channel set in the server! Please remove the following channel from warn logs: <#${warnGuild.channelID}>\n`
-        + `PS: You can delete the warning channel by using \`alice delwarnlogs ${warnGuild.channelID}\``);
+        + `PS: You can delete the warning channel by using \`${CONFIG.prefix} delwarnlogs ${warnGuild.channelID}\``);
 
 
         STORAGE.modlogs.push({ channelID: modlog.id, serverID: msg.guild.id });

@@ -82,12 +82,6 @@ export default class Storage {
 
     public osu: Osu[];
 
-    public qotdchannel: string;
-
-    public qotdping: string;
-
-    public qotdserver: string;
-
     public suggestionchannel: string;
 
     public suggestionserver: string;
@@ -114,9 +108,6 @@ export default class Storage {
         this.noeltime = "";
         this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
         this.osu = [{ osuid: "" }];
-        this.qotdchannel = "";
-        this.qotdserver = "";
-        this.qotdping = "";
         this.suggestionchannel = "";
         this.suggestionserver = "";
         this.victime = "";
