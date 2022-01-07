@@ -8,6 +8,9 @@ export async function messageUpdate(oldMsg: Message | PartialMessage, newMsg: Me
     if (oldMsg.author === null)
         return void console.log("there was an error.");
     if (oldMsg.author.bot) return;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const IgnoredUserList = STORAGE.ignoredusers.find((c) => c.ignoredusers === oldMsg.author?.id);
+    if (IgnoredUserList !== undefined) return;
     const embed = new MessageEmbed()
         .setTitle("Message edited!")
         .setAuthor(oldMsg.author.tag, oldMsg.author.displayAvatarURL({ dynamic: true, size: 4096 }))
