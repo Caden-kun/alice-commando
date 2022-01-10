@@ -1,8 +1,8 @@
 import * as commando from "discord.js-commando";
-import { CONFIG, STORAGE } from "../../utils/globals";
+import { CONFIG, STORAGE, replyembed } from "../../utils/globals";
 import { Message, MessageEmbed, TextChannel } from "discord.js";
 import { getMember } from "../../utils/getMember";
-export default class WarnCommand extends commando.Command {
+export default class BanCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
         super(client, {
 
@@ -104,10 +104,7 @@ export default class WarnCommand extends commando.Command {
         if (banreason === "No reason provided")
             description = `**${member.user.tag}** was banned.`;
 
-        const banembed = new MessageEmbed()
-            .setDescription(description)
-            .setColor(CONFIG.colours.yellow);
-        return msg.channel.send(banembed);
+        return replyembed(msg, description, CONFIG.colours.green);
     }
 }
 

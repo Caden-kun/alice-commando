@@ -1,5 +1,6 @@
 import * as qdb from "quick.db";
 import { Client, CommandoMessage, Inhibition, SQLiteProvider } from "discord.js-commando";
+import { AutoQotd } from "./events/AutoQotd";
 import { CONFIG } from "./utils/globals";
 import { Collection } from "discord.js";
 import { Collections } from "./utils/types";
@@ -31,6 +32,8 @@ async function main(): Promise<void> {
 
     // Runs the onReady function defined in ./events/ready
     client.on("ready", async () => void onReady(client));
+
+    client.on("ready", async () => void AutoQotd(client));
 
     client.on("ready", () => void onAutoPoster(client));
 

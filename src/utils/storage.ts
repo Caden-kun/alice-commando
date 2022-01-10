@@ -2,6 +2,10 @@ import { dump, load } from "js-yaml";
 import { STORAGE } from "./globals";
 import fs from "fs";
 
+export interface AutoQotd {
+    qotdchannel: string;
+    qotdserver: string;
+}
 export interface Roles {
     botupdates: string;
     identifier: string;
@@ -50,6 +54,9 @@ export interface BannedUser {
 export default class Storage {
     private static readonly _configLocation = "./storage.yml";
 
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    public AutoQotd: AutoQotd[];
+
     public banneduser: BannedUser[];
 
     public botbanchannel: string;
@@ -92,6 +99,7 @@ export default class Storage {
 
 
     private constructor() {
+        this.AutoQotd = [{ qotdchannel: "", qotdserver: "" }];
         this.banneduser = [{ banreason: "", botmod: "", referencenumber: 0, userid: "", usertag: "" }];
         this.botbanserver = "";
         this.botbanchannel = "";

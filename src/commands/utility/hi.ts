@@ -1,5 +1,6 @@
 import * as commando from "discord.js-commando";
 import { Message } from "discord.js";
+import { replyembed } from "../../utils/globals";
 
 export default class HiCommand extends commando.Command {
     public constructor(client: commando.CommandoClient) {
@@ -32,6 +33,6 @@ export default class HiCommand extends commando.Command {
     public async run(
         msg: commando.CommandoMessage
     ): Promise<Message | Message[]> {
-        return msg.reply("Hi!");
+        return replyembed(msg, "hi", "00FFB9");
     }
 }

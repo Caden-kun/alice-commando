@@ -2,7 +2,6 @@ import { CONFIG, STORAGE } from "../utils/globals";
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
 import { CommandoClient } from "discord.js-commando";
 import Storage from "../utils/storage";
-
 export async function onReady(client: CommandoClient): Promise<void> {
     console.log("Ready!");
     const users = client.users.cache.size;
