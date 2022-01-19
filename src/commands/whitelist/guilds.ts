@@ -13,7 +13,6 @@ export default class GuildCountCommand extends commando.Command {
 
             guildOnly: true,
 
-
             memberName: "guilds",
 
             name: "guilds",
