@@ -30,5 +30,5 @@ export async function AutoQotd(client: CommandoClient): Promise<void> {
             await channel.send(qotdtext);
 
         });
-    }, 6000); // Runs this every 24 Hours
+    }, 86400000); // Runs this every 24 Hours
 }
