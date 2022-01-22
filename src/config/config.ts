@@ -8,7 +8,10 @@ export interface Colours {
     red: string;
     yellow: string;
 }
-
+export interface DevEnv {
+    devServer: string;
+    isDev: boolean;
+}
 
 /**
  * This represents the config.yml
@@ -21,6 +24,8 @@ export default class Config {
     public readonly colours: Colours;
 
     public readonly dev: string;
+
+    public readonly devEnv: DevEnv;
 
     public readonly kickfailerror: string;
 
@@ -43,6 +48,7 @@ export default class Config {
     private constructor() {
         this.colours = { blue: "", green: "", red: "", yellow: "" };
         this.dev = "";
+        this.devEnv = { devServer: "", isDev: false };
         this.kicknoperms = "";
         this.kickfailerror = "";
         this.kickfailstaff = "";
