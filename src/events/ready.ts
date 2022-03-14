@@ -17,7 +17,6 @@ export async function onReady(client: CommandoClient): Promise<void> {
 
 
     ]; // Creates an arraylist containing phrases you want your bot to switch through.
-
     let item = activitiesList[Math.floor(Math.random() * activitiesList.length)];
     console.log(item);
     if (client.user === null) return;
