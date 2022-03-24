@@ -18,7 +18,7 @@ export async function onCommandRun(cmd: Command, msg: CommandoMessage): Promise<
     const urgentmessage = new MessageEmbed()
         .setTitle(`Urgent Bot Announcement for ${msg.client.user?.username}!`)
         .setThumbnail(msg.client.user?.displayAvatarURL({ dynamic: true }) ?? "" )
-        .setDescription("Normal commands will are being phased out in favour of **slash commands** (/).")
+        .setDescription("Normal commands are being phased out in favour of **slash commands** (/).")
         .addField("What does this mean for you?", "The server you are currently in must re-invite the bot to support slash commands. "
         + "To re-invite alice to your server, [click here!](https://discord.com/api/oauth2/authorize?client_id=934225413163589682&permissions=1644972474359&scope=bot%20applications.commands)", true)
         .addField("When will normal commands stop working?", "The expected date for normal commands to stop working is <t:1651183200>.", true)

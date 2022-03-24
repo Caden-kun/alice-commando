@@ -19,7 +19,7 @@ export interface DevEnv {
  * @property {string[]} channels
  */
 export default class Config {
-    private static readonly _configLocation = "./config.yml";
+    private static readonly _configLocation = "./../config.yml";
 
     public readonly colours: Colours;
 
