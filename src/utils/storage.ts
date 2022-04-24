@@ -89,6 +89,8 @@ export default class Storage {
 
     public osu: Osu[];
 
+    public qotd: string;
+
     public randomQuestion: string;
 
     public suggestionchannel: string;
@@ -118,6 +120,7 @@ export default class Storage {
         this.noeltime = "";
         this.notes = [{ modID: "", note: "", serverID: "", timeStamp: "", userID: "" }];
         this.osu = [{ osuid: "" }];
+        this.qotd = "";
         this.randomQuestion = "";
         this.suggestionchannel = "";
         this.suggestionserver = "";
